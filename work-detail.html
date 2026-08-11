@@ -149,7 +149,6 @@
             padding: 6rem 4rem;
             max-width: 1300px;
             margin: 0 auto;
-            border-top: 1px solid var(--border-line);
         }
         .sec-label {
             font-size: 0.75rem;
@@ -207,6 +206,53 @@
         }
         .data-table td {
             width: 70%;
+        }
+
+        /* 他の施工事例 */
+        .related-works {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 6rem 4rem 2rem 4rem;
+        }
+        .related-works-header {
+            margin-bottom: 2rem;
+        }
+        .related-works-header h2 {
+            font-size: 1.8rem;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
+        .related-works-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+        }
+        .related-work-card {
+            display: block;
+        }
+        .related-work-thumb {
+            aspect-ratio: 4 / 3;
+            background: var(--bg-sub);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            transition: opacity 0.3s;
+        }
+        .related-work-card:hover .related-work-thumb {
+            opacity: 0.8;
+        }
+        .related-work-info h4 {
+            font-size: 0.95rem;
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+        }
+        .related-work-info span {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
         }
 
         /* 一覧へ戻るボタン */
@@ -289,7 +335,12 @@
                             <h3><a href="concept.html">コンセプト</a></h3>
                         </div>
                         <div class="sitemap-group">
-                            <h3><a href="works.html">施工事例</a></h3>
+                            <h3><a href="craftsmanship.html">こだわり</a></h3>
+                            <ul>
+                                <li><a href="craftsmanship.html#construction">自社責任施工の強み</a></li>
+                                <li><a href="craftsmanship.html#quality">特徴・性能</a></li>
+                                <li><a href="craftsmanship.html#support">保証・アフターサポート</a></li>
+                            </ul>
                         </div>
                     </div>
 
@@ -311,12 +362,7 @@
 
                     <div class="sitemap-col">
                         <div class="sitemap-group">
-                            <h3><a href="craftsmanship.html">こだわり</a></h3>
-                            <ul>
-                                <li><a href="craftsmanship.html#construction">自社責任施工の強み</a></li>
-                                <li><a href="craftsmanship.html#quality">特徴・性能</a></li>
-                                <li><a href="craftsmanship.html#support">保証・アフターサポート</a></li>
-                            </ul>
+                            <h3><a href="works.html">施工事例</a></h3>
                         </div>
                         <div class="sitemap-group">
                             <h3><a href="process.html">家づくりのプロセス</a></h3>
@@ -394,6 +440,8 @@
             .footer-bottom-links a { color: #ffffff; }
             footer { background: #111111; color: #ffffff; padding: 10rem 4rem 6rem 4rem; border-top: 1px solid #222222; }
             @media (max-width: 1024px) {
+                .related-works { padding: 4rem 2rem 1rem 2rem; }
+                .related-works-grid { grid-template-columns: 1fr; gap: 3rem; }
                 .footer-sitemap { grid-template-columns: repeat(2, 1fr); }
                 footer { padding: 7rem 2rem 4rem 2rem; }
                 .footer-bottom-row { flex-direction: column; gap: 1.5rem; align-items: flex-start; }
@@ -409,8 +457,8 @@
             <ul>
                 <li><a href="concept.html">コンセプト</a></li>
                 <li><a href="products.html">プロダクト</a></li>
-                <li><a href="works.html" style="border-bottom: 1px solid #000;">施工事例</a></li>
                 <li><a href="craftsmanship.html">こだわり</a></li>
+                <li><a href="works.html" style="border-bottom: 1px solid #000;">施工事例</a></li>
                 <li><a href="process.html">家づくりのプロセス</a></li>
                 <li><a href="modelhouse.html">モデルハウス</a></li>
                 <li><a href="company.html">会社紹介</a></li>
@@ -444,7 +492,7 @@
     </div>
 
     <!-- ストーリーセクション -->
-    <section style="border-top: none;">
+    <section>
         <div class="story-block">
             <div>
                 <div class="sec-label">Concept & Story</div>
@@ -502,6 +550,37 @@
             </tr>
         </table>
     </section>
+
+    <!-- 他の施工事例 -->
+    <div class="related-works">
+        <div class="sec-label">Other Works</div>
+        <div class="related-works-header">
+            <h2>その他の施工事例</h2>
+        </div>
+        <div class="related-works-grid">
+            <a href="work-detail.html" class="related-work-card">
+                <div class="related-work-thumb">[ 施工事例サムネイル 02 ]</div>
+                <div class="related-work-info">
+                    <h4>素材の気配を感じる、無垢の木の家</h4>
+                    <span>天童市 / 提案型オーダー住宅</span>
+                </div>
+            </a>
+            <a href="work-detail.html" class="related-work-card">
+                <div class="related-work-thumb">[ 施工事例サムネイル 03 ]</div>
+                <div class="related-work-info">
+                    <h4>街並みに溶け込むミニマルな佇まい</h4>
+                    <span>上山市 / 高水準規格住宅</span>
+                </div>
+            </a>
+            <a href="work-detail.html" class="related-work-card">
+                <div class="related-work-thumb">[ 施工事例サムネイル 04 ]</div>
+                <div class="related-work-info">
+                    <h4>古き良きの構造を活かしたモダン邸宅</h4>
+                    <span>山形市 / リノベーション</span>
+                </div>
+            </a>
+        </div>
+    </div>
 
     <!-- 一覧へ戻る -->
     <div class="back-link-wrap">

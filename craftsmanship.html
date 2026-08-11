@@ -90,7 +90,7 @@
             position: relative;
             width: 100%;
             height: 380px;
-            background-color: var(--bg-sub);
+            background-color: #fcfcfb;
             display: flex;
             align-items: center;
             margin-top: 73px;
@@ -190,7 +190,7 @@
             align-items: start;
         }
         .feature-content h2 {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 300;
             line-height: 1.5;
             margin-bottom: 1.5rem;
@@ -239,6 +239,52 @@
             font-size: 0.85rem;
             color: var(--text-main);
             line-height: 1.9;
+        }
+
+        /* 施工事例プレビュー */
+        .works-preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .works-preview-header h2 {
+            font-size: 1.8rem;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
+        .digest-works {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+        }
+        .work-card {
+            display: block;
+        }
+        .wire-visual-work {
+            aspect-ratio: 4 / 3;
+            background: var(--bg-sub);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            transition: opacity 0.3s;
+        }
+        .work-card:hover .wire-visual-work {
+            opacity: 0.8;
+        }
+        .work-info h4 {
+            font-size: 0.95rem;
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+        }
+        .work-info span {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
         }
 
         /* Information & Contact (CTA) エリア */
@@ -335,6 +381,8 @@
             section { padding: 5rem 2rem; }
             .feature-block { grid-template-columns: 1fr; gap: 3rem; }
             .specs-grid { grid-template-columns: 1fr; }
+            .digest-works { grid-template-columns: 1fr; gap: 3rem; }
+            .works-preview-header { flex-direction: column; align-items: flex-start; }
             .footer-sitemap { grid-template-columns: repeat(2, 1fr); }
             .contact-cta-section { padding: 6rem 2rem; }
             footer { padding: 7rem 2rem 4rem 2rem; }
@@ -351,8 +399,8 @@
             <ul>
                 <li><a href="concept.html">コンセプト</a></li>
                 <li><a href="products.html">プロダクト</a></li>
-                <li><a href="works.html">施工事例</a></li>
                 <li><a href="craftsmanship.html" style="border-bottom: 1px solid #000;">こだわり</a></li>
+                <li><a href="works.html">施工事例</a></li>
                 <li><a href="process.html">家づくりのプロセス</a></li>
                 <li><a href="modelhouse.html">モデルハウス</a></li>
                 <li><a href="company.html">会社紹介</a></li>
@@ -456,6 +504,38 @@
         </div>
     </section>
 
+    <!-- 施工事例プレビュー・誘導 -->
+    <section id="works-preview">
+        <div class="sec-label">Works</div>
+        <div class="works-preview-header">
+            <h2>こだわりが息づく、施工事例。</h2>
+            <a href="works.html" class="btn-text-link" style="margin-top:0;">事例一覧を見る &rarr;</a>
+        </div>
+        <div class="digest-works">
+            <a href="work-detail.html" class="work-card">
+                <div class="wire-visual-work">[ 施工事例ビジュアル 01 ]</div>
+                <div class="work-info">
+                    <h4>光の抜けと中庭を愉しむ平屋の住まい</h4>
+                    <span>山形市 / 注文住宅</span>
+                </div>
+            </a>
+            <a href="work-detail.html" class="work-card">
+                <div class="wire-visual-work">[ 施工事例ビジュアル 02 ]</div>
+                <div class="work-info">
+                    <h4>素材の気配を感じる、無垢の木の家</h4>
+                    <span>天童市 / 提案型オーダー住宅</span>
+                </div>
+            </a>
+            <a href="work-detail.html" class="work-card">
+                <div class="wire-visual-work">[ 施工事例ビジュアル 03 ]</div>
+                <div class="work-info">
+                    <h4>街並みに溶け込むミニマルな佇まい</h4>
+                    <span>上山市 / 高水準規格住宅</span>
+                </div>
+            </a>
+        </div>
+    </section>
+
     <!-- Information & Contact (CTA) エリア -->
     <div class="contact-cta-section">
         <div class="sec-label">Information & Contact</div>
@@ -495,7 +575,12 @@
                         <h3><a href="concept.html">コンセプト</a></h3>
                     </div>
                     <div class="sitemap-group">
-                        <h3><a href="works.html">施工事例</a></h3>
+                        <h3><a href="craftsmanship.html">こだわり</a></h3>
+                        <ul>
+                            <li><a href="craftsmanship.html#construction">自社責任施工の強み</a></li>
+                            <li><a href="craftsmanship.html#quality">特徴・性能</a></li>
+                            <li><a href="craftsmanship.html#support">保証・アフターサポート</a></li>
+                        </ul>
                     </div>
                 </div>
 
@@ -517,12 +602,7 @@
 
                 <div class="sitemap-col">
                     <div class="sitemap-group">
-                        <h3><a href="craftsmanship.html">こだわり</a></h3>
-                        <ul>
-                            <li><a href="craftsmanship.html#construction">自社責任施工の強み</a></li>
-                            <li><a href="craftsmanship.html#quality">特徴・性能</a></li>
-                            <li><a href="craftsmanship.html#support">保証・アフターサポート</a></li>
-                        </ul>
+                        <h3><a href="works.html">施工事例</a></h3>
                     </div>
                     <div class="sitemap-group">
                         <h3><a href="process.html">家づくりのプロセス</a></h3>

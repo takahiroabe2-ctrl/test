@@ -157,6 +157,52 @@
             line-height: 1.9;
         }
 
+        /* AURUM ピックアップ */
+        .aurum-pickup-section {
+            max-width: none;
+            width: 100%;
+            background-color: #fcfcfb;
+            padding: 8rem 4rem;
+        }
+        .aurum-pickup {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 5rem;
+            align-items: center;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .aurum-pickup-visual {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            background: var(--bg-sub);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+        }
+        .aurum-pickup-name {
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 0.06em;
+            margin-bottom: 1rem;
+        }
+        .aurum-pickup-text h2 {
+            font-size: 1.8rem;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+        }
+        .aurum-pickup-text p {
+            font-size: 0.95rem;
+            color: var(--text-main);
+            line-height: 2;
+            margin-bottom: 1.5rem;
+        }
+
         /* プロダクト ダイジェスト */
         .digest-products {
             display: grid;
@@ -175,7 +221,7 @@
             justify-content: space-between;
         }
         .prod-thumb-box h4 {
-            font-size: 0.9rem;
+            font-size: 1.05rem;
             font-weight: 400;
         }
         .prod-thumb-box span {
@@ -220,7 +266,7 @@
 
         /* モデルハウス セクション */
         .modelhouse-section {
-            background-color: var(--bg-sub);
+            background-color: #fcfcfb;
             padding: 7rem 0;
             overflow: hidden;
         }
@@ -285,15 +331,13 @@
         }
         .mh-card {
             background: var(--bg-base);
-            border: 1px solid var(--border-line);
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            opacity: 0.7;
         }
         .mh-visual {
             width: 100%;
-            background: #e2e2df;
+            background: var(--bg-sub);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -531,7 +575,8 @@
             header { padding: 1.5rem 2rem; }
             nav { display: none; }
             section { padding: 5rem 2rem; }
-            .digest-concept, .digest-works, .digest-two-col, .digest-products, .footer-cta-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .aurum-pickup-section { padding: 5rem 2rem; }
+            .digest-concept, .aurum-pickup, .digest-works, .digest-two-col, .digest-products, .footer-cta-grid { grid-template-columns: 1fr; gap: 3rem; }
             .footer-sitemap { grid-template-columns: repeat(2, 1fr); }
             .modelhouse-slider-track { grid-template-columns: 1fr; padding: 0 2rem; }
             .mh-card.side .mh-visual {
@@ -556,8 +601,8 @@
             <ul>
                 <li><a href="concept.html">コンセプト</a></li>
                 <li><a href="products.html">プロダクト</a></li>
-                <li><a href="works.html">施工事例</a></li>
                 <li><a href="craftsmanship.html">こだわり</a></li>
+                <li><a href="works.html">施工事例</a></li>
                 <li><a href="process.html">家づくりのプロセス</a></li>
                 <li><a href="modelhouse.html">モデルハウス</a></li>
                 <li><a href="company.html">会社紹介</a></li>
@@ -579,11 +624,25 @@
         <div class="digest-concept">
             <div>
                 <div class="sec-label">Concept</div>
-                <h2 style="font-size: 2rem; font-weight: 300; margin-bottom: 1.5rem;">年間10棟という選択、<br>暮らしに余白と寛ぎを。</h2>
-                <p>効率を優先させず、一人の設計士と職人がすべてのディテールに向き合う。私たちの住まいづくりの哲学を紐解きます。</p>
+                <h2 style="font-size: 1.8rem; font-weight: 300; margin-bottom: 1.5rem;">「住まい」とは、「暮らし」を<br>美しく包み込む器である。</h2>
                 <a href="concept.html" class="btn-text-link">コンセプトを読む &rarr;</a>
             </div>
             <div class="wire-visual-work" style="aspect-ratio: 4/3;">[ 哲学を象徴するこだわりの空間・素材のビジュアル ]</div>
+        </div>
+    </section>
+
+    <!-- AURUM ピックアップ -->
+    <section class="aurum-pickup-section">
+        <div class="aurum-pickup">
+            <div class="aurum-pickup-visual">
+                [ AURUM メイン外観：光と陰影のファサード ]
+            </div>
+            <div class="aurum-pickup-text">
+                <div class="sec-label">Flagship Model</div>
+                <p class="aurum-pickup-name">提案型オーダー住宅 AURUM（オーラム）</p>
+                <h2>年間10棟という選択、<br>暮らしに余白と寛ぎを。</h2>
+                <a href="products.html#order" class="btn-text-link">AURUMを詳しく見る &rarr;</a>
+            </div>
         </div>
     </section>
 
@@ -591,7 +650,7 @@
     <section>
         <div class="sec-label">Products</div>
         <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom: 2rem;">
-            <h2 style="font-size: 2rem; font-weight: 300;">上質な暮らしを形にする、4つの選択肢。</h2>
+            <h2 style="font-size: 1.8rem; font-weight: 300;">上質な暮らしを形にする、4つの選択肢。</h2>
             <a href="products.html" class="btn-text-link" style="margin-top:0;">すべてのプロダクトを見る &rarr;</a>
         </div>
         <div class="digest-products">
@@ -627,7 +686,7 @@
     <section>
         <div class="sec-label">Works</div>
         <div style="display:flex; justify-content:space-between; align-items:flex-end;">
-            <h2 style="font-size: 2rem; font-weight: 300;">施工事例</h2>
+            <h2 style="font-size: 1.8rem; font-weight: 300;">施工事例</h2>
             <a href="works.html" class="btn-text-link" style="margin-top:0;">事例一覧・絞り込みへ &rarr;</a>
         </div>
         <div class="digest-works">
@@ -727,7 +786,7 @@
     <section>
         <div class="sec-label">News</div>
         <div style="display:flex; justify-content:space-between; align-items:flex-end;">
-            <h2 style="font-size: 2rem; font-weight: 300;">お知らせ</h2>
+            <h2 style="font-size: 1.8rem; font-weight: 300;">お知らせ</h2>
             <a href="news.html" class="btn-text-link" style="margin-top:0;">全てのお知らせを見る &rarr;</a>
         </div>
         <div class="news-list">
@@ -790,7 +849,12 @@
                         <h3><a href="concept.html">コンセプト</a></h3>
                     </div>
                     <div class="sitemap-group">
-                        <h3><a href="works.html">施工事例</a></h3>
+                        <h3><a href="craftsmanship.html">こだわり</a></h3>
+                        <ul>
+                            <li><a href="craftsmanship.html#construction">自社責任施工の強み</a></li>
+                            <li><a href="craftsmanship.html#quality">特徴・性能</a></li>
+                            <li><a href="craftsmanship.html#support">保証・アフターサポート</a></li>
+                        </ul>
                     </div>
                 </div>
 
@@ -814,12 +878,7 @@
                 <!-- カラム3 -->
                 <div class="sitemap-col">
                     <div class="sitemap-group">
-                        <h3><a href="craftsmanship.html">こだわり</a></h3>
-                        <ul>
-                            <li><a href="craftsmanship.html#construction">自社責任施工の強み</a></li>
-                            <li><a href="craftsmanship.html#quality">特徴・性能</a></li>
-                            <li><a href="craftsmanship.html#support">保証・アフターサポート</a></li>
-                        </ul>
+                        <h3><a href="works.html">施工事例</a></h3>
                     </div>
                     <div class="sitemap-group">
                         <h3><a href="process.html">家づくりのプロセス</a></h3>

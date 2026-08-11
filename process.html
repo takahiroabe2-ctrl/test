@@ -90,7 +90,7 @@
             position: relative;
             width: 100%;
             height: 380px;
-            background-color: var(--bg-sub);
+            background-color: #fcfcfb;
             display: flex;
             align-items: center;
             margin-top: 73px;
@@ -211,6 +211,73 @@
             letter-spacing: 0.05em;
         }
 
+        /* よくあるご質問 */
+        .faq-section {
+            max-width: none;
+            width: 100%;
+            background-color: #fcfcfb;
+        }
+        .faq-section .sec-label,
+        .faq-section h2,
+        .faq-list {
+            max-width: 1300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .faq-section .sec-label,
+        .faq-section h2 {
+            text-align: center;
+        }
+        .faq-section h2 {
+            font-size: 1.8rem;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            margin-bottom: 3rem;
+        }
+        .faq-list {
+            border-top: 1px solid var(--border-line);
+        }
+        .faq-item {
+            border-bottom: 1px solid var(--border-line);
+        }
+        .faq-item summary {
+            list-style: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+            padding: 1.8rem 0;
+            font-size: 1rem;
+            font-weight: 400;
+            letter-spacing: 0.04em;
+            line-height: 1.7;
+        }
+        .faq-item summary::-webkit-details-marker {
+            display: none;
+        }
+        .faq-item summary::after {
+            content: "+";
+            flex-shrink: 0;
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: var(--text-muted);
+            transition: transform 0.2s;
+        }
+        .faq-item[open] summary::after {
+            content: "−";
+        }
+        .faq-item summary:hover {
+            opacity: 0.7;
+        }
+        .faq-answer {
+            padding: 0 0 1.8rem 0;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            line-height: 2;
+            max-width: 800px;
+        }
+
         /* Information & Contact (CTA) エリア */
         .contact-cta-section {
             background: var(--bg-sub);
@@ -302,6 +369,7 @@
             .page-intro-copy { padding: 5rem 2rem 3rem 2rem; }
             section { padding: 5rem 2rem; }
             .process-item, .process-item.reverse { grid-template-columns: 1fr; gap: 3rem; direction: ltr; }
+            .faq-item summary { gap: 1rem; font-size: 0.95rem; }
             .footer-sitemap { grid-template-columns: repeat(2, 1fr); }
             footer { padding: 7rem 2rem 4rem 2rem; }
             .footer-bottom-row { flex-direction: column; gap: 1.5rem; align-items: flex-start; }
@@ -317,8 +385,8 @@
             <ul>
                 <li><a href="concept.html">コンセプト</a></li>
                 <li><a href="products.html">プロダクト</a></li>
-                <li><a href="works.html">施工事例</a></li>
                 <li><a href="craftsmanship.html">こだわり</a></li>
+                <li><a href="works.html">施工事例</a></li>
                 <li><a href="process.html" style="border-bottom: 1px solid #000;">家づくりのプロセス</a></li>
                 <li><a href="modelhouse.html">モデルハウス</a></li>
                 <li><a href="company.html">会社紹介</a></li>
@@ -444,6 +512,38 @@
         </div>
     </section>
 
+    <!-- よくあるご質問 -->
+    <section id="faq" class="faq-section">
+        <div class="sec-label">FAQ</div>
+        <h2>よくあるご質問</h2>
+        <div class="faq-list">
+            <details class="faq-item">
+                <summary>相談やモデルハウス見学に、費用はかかりますか？</summary>
+                <div class="faq-answer">初回のご相談・モデルハウス見学は無料です。資金計画や土地探しのご相談もお気軽にお問い合わせください。</div>
+            </details>
+            <details class="faq-item">
+                <summary>土地が決まっていなくても相談できますか？</summary>
+                <div class="faq-answer">はい、可能です。ご希望のエリアや暮らし方をお伺いしたうえで、土地探しからプランニングまで一貫してサポートします。</div>
+            </details>
+            <details class="faq-item">
+                <summary>契約からお引き渡しまで、どのくらいの期間がかかりますか？</summary>
+                <div class="faq-answer">プランの内容や敷地条件により異なりますが、ご契約からお引き渡しまでおおよそ8〜12ヶ月を目安としています。詳細はヒアリング時にご案内します。</div>
+            </details>
+            <details class="faq-item">
+                <summary>途中でプランや仕様の変更はできますか？</summary>
+                <div class="faq-answer">詳細設計の段階までは、打合せを重ねながら柔軟に調整できます。着工後の変更は工程や費用に影響するため、できる範囲でご相談に応じます。</div>
+            </details>
+            <details class="faq-item">
+                <summary>お引き渡し後のアフターサポートはありますか？</summary>
+                <div class="faq-answer">定期点検プログラムと長期保証を用意しています。不具合やメンテナンスのご相談にも、地域密着の体制で対応します。</div>
+            </details>
+            <details class="faq-item">
+                <summary>資金計画や住宅ローンの相談もできますか？</summary>
+                <div class="faq-answer">はい。ご予算に合わせた資金計画の整理や、住宅ローンのご案内もサポートします。必要に応じて専門機関とも連携します。</div>
+            </details>
+        </div>
+    </section>
+
     <!-- Information & Contact (CTA) エリア -->
     <div class="contact-cta-section">
         <div class="sec-label">Information & Contact</div>
@@ -483,7 +583,12 @@
                         <h3><a href="concept.html">コンセプト</a></h3>
                     </div>
                     <div class="sitemap-group">
-                        <h3><a href="works.html">施工事例</a></h3>
+                        <h3><a href="craftsmanship.html">こだわり</a></h3>
+                        <ul>
+                            <li><a href="craftsmanship.html#construction">自社責任施工の強み</a></li>
+                            <li><a href="craftsmanship.html#quality">特徴・性能</a></li>
+                            <li><a href="craftsmanship.html#support">保証・アフターサポート</a></li>
+                        </ul>
                     </div>
                 </div>
 
@@ -505,12 +610,7 @@
 
                 <div class="sitemap-col">
                     <div class="sitemap-group">
-                        <h3><a href="craftsmanship.html">こだわり</a></h3>
-                        <ul>
-                            <li><a href="craftsmanship.html#construction">自社責任施工の強み</a></li>
-                            <li><a href="craftsmanship.html#quality">特徴・性能</a></li>
-                            <li><a href="craftsmanship.html#support">保証・アフターサポート</a></li>
-                        </ul>
+                        <h3><a href="works.html">施工事例</a></h3>
                     </div>
                     <div class="sitemap-group">
                         <h3><a href="process.html">家づくりのプロセス</a></h3>
