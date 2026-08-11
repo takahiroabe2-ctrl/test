@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livearc | モデルハウス</title>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        :root {
+            --bg-base: #ffffff;
+            --bg-sub: #f5f5f3;
+            --text-main: #111111;
+            --text-muted: #777777;
+            --border-line: #dcdcdc;
+            --font-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            font-family: var(--font-base);
+            line-height: 1.8;
+            letter-spacing: 0.05em;
+            scroll-behavior: smooth;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* ヘッダー */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 4rem;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border-line);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            align-items: center;
+            gap: 1.8rem;
+        }
+
+        nav a {
+            font-size: 0.8rem;
+        }
+
+        nav a:hover {
+            color: #000;
+            border-bottom: 1px solid #000;
+        }
+
+        .nav-btn {
+            border: 1px solid var(--text-main);
+            padding: 0.35rem 0.9rem;
+            font-size: 0.8rem; 
+            transition: all 0.3s;
+        }
+        .nav-btn:hover {
+            background: var(--text-main);
+            color: #fff;
+            border-bottom: 1px solid var(--text-main);
+        }
+
+        /* ビジュアルワイドヘッダー */
+        .page-visual-header {
+            position: relative;
+            width: 100%;
+            height: 380px;
+            background-color: var(--bg-sub);
+            display: flex;
+            align-items: center;
+            margin-top: 73px;
+            margin-bottom: 0;
+        }
+        .page-visual-inner {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 4rem;
+        }
+        .page-visual-content h1 {
+            font-size: 2.2rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            line-height: 1.3;
+            color: #111111;
+            margin-bottom: 0.4rem;
+        }
+        .page-visual-content .sec-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            margin-bottom: 0;
+        }
+
+        /* 導入コピーエリア */
+        .page-intro-copy {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 8rem 4rem 4rem 4rem;
+            text-align: center;
+        }
+        .page-intro-copy h2 {
+            font-size: 2.2rem;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            line-height: 1.5;
+        }
+
+        /* 導入コピー直下のコンテンツセクション */
+        .intro-content-section {
+            padding: 3rem 4rem 8rem 4rem;
+        }
+
+        /* セクション共通 */
+        section {
+            padding: 8rem 4rem;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .sec-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        /* モデルハウス紹介イントロ */
+        .modelhouse-intro {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 5rem;
+            align-items: start;
+        }
+        .intro-text h2 {
+            font-size: 2rem;
+            font-weight: 300;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.05em;
+        }
+        .intro-text p {
+            font-size: 0.95rem;
+            color: var(--text-main);
+            line-height: 2;
+            margin-bottom: 1.5rem;
+        }
+        .wire-visual-main {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            background: var(--bg-sub);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* 大胆な写真ギャラリーセクション */
+        .gallery-section {
+            padding: 8rem 4rem;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .gallery-header {
+            margin-bottom: 4rem;
+        }
+        .gallery-header h2 {
+            font-size: 2rem;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
+
+        /* 大胆なグリッドレイアウト（変則マルチカラム） */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
+            align-items: stretch;
+        }
+
+        .gallery-item {
+            background: var(--bg-sub);
+            position: relative;
+            overflow: hidden;
+            transition: opacity 0.3s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .gallery-item:hover {
+            opacity: 0.85;
+        }
+
+        .gallery-item.large {
+            grid-column: span 8;
+        }
+        .gallery-item.small {
+            grid-column: span 4;
+        }
+        .gallery-item.medium-left {
+            grid-column: span 5;
+        }
+        .gallery-item.medium-right {
+            grid-column: span 7;
+        }
+        .gallery-item.full {
+            grid-column: span 12;
+        }
+
+        .gallery-placeholder {
+            flex: 1 1 auto;
+            width: 100%;
+            min-height: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-bottom: 4.5rem;
+            box-sizing: border-box;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            background: #ededec;
+        }
+        .gallery-item.large .gallery-placeholder {
+            aspect-ratio: 16 / 10;
+        }
+        .gallery-item.small .gallery-placeholder {
+            aspect-ratio: 4 / 3;
+        }
+        .gallery-item.medium-left .gallery-placeholder {
+            aspect-ratio: 4 / 3;
+        }
+        .gallery-item.medium-right .gallery-placeholder {
+            aspect-ratio: 16 / 9;
+        }
+        .gallery-item.full .gallery-placeholder {
+            aspect-ratio: 21 / 9;
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            min-height: 4.5rem;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0.65rem 0.75rem 0.65rem 0;
+            background: rgba(255, 255, 255, 0.92);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.25rem;
+        }
+        .gallery-caption span {
+            display: block;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            text-align: left;
+        }
+        .gallery-caption .caption-sub {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        /* 施設概要・アクセス情報 */
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        .info-table th, .info-table td {
+            padding: 1.2rem 0;
+            border-bottom: 1px solid var(--border-line);
+            text-align: left;
+            vertical-align: top;
+        }
+        .info-table th {
+            width: 30%;
+            color: var(--text-muted);
+            font-weight: 400;
+            letter-spacing: 0.05em;
+        }
+        .info-table td {
+            width: 70%;
+            letter-spacing: 0.05em;
+        }
+        .map-visual {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            background: var(--bg-sub);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* 予約フォームセクション */
+        .reservation-section {
+            background: var(--bg-sub);
+            padding: 9rem 4rem;
+        }
+        .reservation-inner {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--bg-base);
+            padding: 4rem;
+            border: 1px solid var(--border-line);
+        }
+        .reservation-inner h2 {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+            text-align: center;
+        }
+        .reservation-inner p.form-desc {
+            font-size: 0.9rem;
+            color: var(--text-main);
+            text-align: center;
+            margin-bottom: 3rem;
+            line-height: 1.8;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            margin-bottom: 0.6rem;
+            letter-spacing: 0.05em;
+        }
+        .form-group label span {
+            background: var(--text-main);
+            color: #fff;
+            font-size: 0.65rem;
+            padding: 0.1rem 0.4rem;
+            margin-left: 0.5rem;
+            vertical-align: middle;
+        }
+        .form-control {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            background: var(--bg-base);
+            border: 1px solid var(--border-line);
+            font-size: 0.95rem;
+            color: var(--text-main);
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .form-control:focus {
+            border-color: var(--text-main);
+        }
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+        .form-submit-row {
+            text-align: center;
+            margin-top: 3rem;
+        }
+        .btn-submit {
+            display: inline-block;
+            background: var(--text-main);
+            color: #fff;
+            padding: 1rem 4rem;
+            font-size: 0.85rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            border: 1px solid var(--text-main);
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+        .btn-submit:hover {
+            opacity: 0.8;
+        }
+
+        /* フッター */
+        footer {
+            background: #111111;
+            color: #ffffff;
+            padding: 10rem 4rem 6rem 4rem;
+            border-top: 1px solid #222222;
+        }
+        .footer-inner { max-width: 1300px; margin: 0 auto; }
+        .footer-logo-row { margin-bottom: 5rem; }
+        .footer-logo { font-size: 1.4rem; font-weight: 700; letter-spacing: 0.05em; display: inline-block; cursor: pointer; color: #ffffff; }
+        .footer-sitemap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3rem; margin-bottom: 6rem; }
+        .sitemap-col { display: flex; flex-direction: column; gap: 2rem; }
+        .sitemap-group h3 { font-size: 0.95rem; font-weight: 500; margin-bottom: 0.8rem; letter-spacing: 0.05em; }
+        .sitemap-group h3 a { color: #ffffff; }
+        .sitemap-group ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; padding-left: 0.8rem; border-left: 1px solid #333333; }
+        .sitemap-group li a { font-size: 0.82rem; color: #ffffff; }
+        .footer-bottom-row { display: flex; justify-content: space-between; align-items: center; padding-top: 4rem; border-top: 1px solid #222222; font-size: 0.75rem; color: #ffffff; }
+        .footer-sns {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .footer-sns a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            transition: opacity 0.3s;
+        }
+        .footer-sns a:hover {
+            opacity: 0.7;
+        }
+
+        .footer-bottom-links { display: flex; align-items: center;
+            gap: 2rem; }
+        .footer-bottom-links a { color: #ffffff; }
+
+        @media (max-width: 1024px) {
+            header { padding: 1.5rem 2rem; }
+            nav { display: none; }
+            .page-visual-inner { padding: 0 2rem; }
+            .page-visual-header { height: 240px; }
+            .page-visual-content h1 { font-size: 1.8rem; }
+            .page-intro-copy { padding: 5rem 2rem 3rem 2rem; }
+            .intro-content-section { padding: 3rem 2rem 5rem 2rem; }
+            section, .gallery-section { padding: 5rem 2rem; }
+            .modelhouse-intro { grid-template-columns: 1fr; gap: 3rem; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .gallery-item.large, .gallery-item.small, .gallery-item.medium-left, .gallery-item.medium-right, .gallery-item.full {
+                grid-column: span 1;
+                height: auto;
+            }
+            .gallery-item.large .gallery-placeholder,
+            .gallery-item.small .gallery-placeholder,
+            .gallery-item.medium-left .gallery-placeholder,
+            .gallery-item.medium-right .gallery-placeholder,
+            .gallery-item.full .gallery-placeholder {
+                aspect-ratio: 4 / 3;
+            }
+            .reservation-section { padding: 5rem 2rem; }
+            .reservation-inner { padding: 2rem; }
+            .footer-sitemap { grid-template-columns: repeat(2, 1fr); }
+            footer { padding: 7rem 2rem 4rem 2rem; }
+            .footer-bottom-row { flex-direction: column; gap: 1.5rem; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- グローバルヘッダー -->
+    <header>
+        <div class="logo" onclick="location.href='index.html';">LIVEARC</div>
+        <nav>
+            <ul>
+                <li><a href="concept.html">コンセプト</a></li>
+                <li><a href="products.html">プロダクト</a></li>
+                <li><a href="works.html">施工事例</a></li>
+                <li><a href="craftsmanship.html">こだわり</a></li>
+                <li><a href="process.html">家づくりのプロセス</a></li>
+                <li><a href="modelhouse.html" style="border-bottom: 1px solid #000;">モデルハウス</a></li>
+                <li><a href="company.html">会社紹介</a></li>
+                <li style="display: flex; gap: 10px; align-items: center; margin-left: 0.5rem;">
+                    <a href="contact.html" class="nav-btn">お問い合わせ</a>
+                    <a href="modelhouse.html" class="nav-btn">モデルハウス見学</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ビジュアルワイドヘッダー -->
+    <div class="page-visual-header">
+        <div class="page-visual-inner">
+            <div class="page-visual-content">
+                <h1>モデルハウス</h1>
+                <div class="sec-label">Model House</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 導入コピーエリア -->
+    <div class="page-intro-copy">
+        <h2>光と素材が織りなす、Livearcの空間思想を体感する。</h2>
+    </div>
+
+    <!-- モデルハウス紹介イントロ -->
+    <section class="intro-content-section">
+        <div class="modelhouse-intro">
+            <div class="wire-visual-main">
+                [ モデルハウス的外観・メインビジュアル ]
+            </div>
+            <div class="intro-text">
+                <div class="sec-label">Concept House</div>
+                <h2>山形の気候に寄り添い、日常を美しく仕立てる住まい。</h2>
+                <p>私たちが提案するモデルハウスは、単に見栄えの良いショールームではありません。外に広がる自然の景観や移ろう光を巧みに取り込み、内と外がシームレスにつながる心地よさを追求したリアルサイズハウスです。</p>
+                <p>無垢の木の肌触り、計算された窓の配置が生む陰影、そして圧倒的な温熱環境を、ぜひ現地で五感を使ってお確かめください。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 大胆な写真ギャラリーセクション -->
+    <div class="gallery-section">
+        <div class="gallery-header">
+            <div class="sec-label">Gallery</div>
+            <h2>空間ディテールギャラリー</h2>
+        </div>
+
+        <div class="gallery-grid">
+            <!-- ギャラリー1 (Large: 8col) -->
+            <div class="gallery-item large">
+                <div class="gallery-placeholder">[ リビング・大開口と吹き抜け ]</div>
+                <div class="gallery-caption">
+                    <span>開放感あふれる吹き抜けリビング</span>
+                    <span class="caption-sub">Living Room</span>
+                </div>
+            </div>
+
+            <!-- ギャラリー2 (Small: 4col) -->
+            <div class="gallery-item small">
+                <div class="gallery-placeholder">[ 造作キッチン・素材感 ]</div>
+                <div class="gallery-caption">
+                    <span>素材が引き立つフルフラットキッチン</span>
+                    <span class="caption-sub">Kitchen</span>
+                </div>
+            </div>
+
+            <!-- ギャラリー3 (Medium-Left: 5col) -->
+            <div class="gallery-item medium-left">
+                <div class="gallery-placeholder">[ 階段・ディテール ]</div>
+                <div class="gallery-caption">
+                    <span>光を通すスチールストリップ階段</span>
+                    <span class="caption-sub">Stairs</span>
+                </div>
+            </div>
+
+            <!-- ギャラリー4 (Medium-Right: 7col) -->
+            <div class="gallery-item medium-right">
+                <div class="gallery-placeholder">[ ダイニング・外の景色 ]</div>
+                <div class="gallery-caption">
+                    <span>借景を楽しむパノラマダイニング</span>
+                    <span class="caption-sub">Dining</span>
+                </div>
+            </div>
+
+            <!-- ギャラリー5 (Full: 12col) -->
+            <div class="gallery-item full">
+                <div class="gallery-placeholder">[ ナイトビュー・間接照明 ]</div>
+                <div class="gallery-caption">
+                    <span>夕景に佇む、美しく灯るファサード</span>
+                    <span class="caption-sub">Night View</span>
+                </div>
+            </div>
+
+            <!-- ギャラリー6 (Small: 4col) -->
+            <div class="gallery-item small">
+                <div class="gallery-placeholder">[ パウダールーム・造作洗面 ]</div>
+                <div class="gallery-caption">
+                    <span>潔い美しさのミニマル洗面化粧台</span>
+                    <span class="caption-sub">Powder Room</span>
+                </div>
+            </div>
+
+            <!-- ギャラリー7 (Large: 8col) -->
+            <div class="gallery-item large">
+                <div class="gallery-placeholder">[ インナーテラス・プライベート空間 ]</div>
+                <div class="gallery-caption">
+                    <span>内外が繋がるインナーテラス</span>
+                    <span class="caption-sub">Terrace</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 施設概要・アクセス -->
+    <section>
+        <div class="modelhouse-intro">
+            <div class="map-visual">
+                [ Googleマップ・周辺アクセスマップ ]
+            </div>
+            <div class="intro-text">
+                <div class="sec-label">Access</div>
+                <h2>モデルハウス概要・アクセス</h2>
+                <table class="info-table">
+                    <tr>
+                        <th>公開場所</th>
+                        <td>山形県山形市〇〇町 2-15-8</td>
+                    </tr>
+                    <tr>
+                        <th>営業時間</th>
+                        <td>10:00 〜 17:00（完全予約制）</td>
+                    </tr>
+                    <tr>
+                        <th>定休日</th>
+                        <td>水曜日・木曜日</td>
+                    </tr>
+                    <tr>
+                        <th>アクセス</th>
+                        <td>山形駅よりお車で約15分 / 東北中央自動車道 山形中央ICより約10分</td>
+                    </tr>
+                    <tr>
+                        <th>駐車場</th>
+                        <td>専用駐車場 3台あり</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- 見学予約フォームセクション -->
+    <div id="reserve-form" class="reservation-section">
+        <div class="reservation-inner">
+            <div class="sec-label" style="text-align: center;">Reservation</div>
+            <h2>モデルハウス見学予約</h2>
+            <p class="form-desc">下記フォームに必要事項をご入力の上、ご予約ください。<br>担当スタッフより追って確認のご連絡を差し上げます。</p>
+
+            <form action="#" method="POST">
+                <div class="form-group">
+                    <label>お名前 <span>必須</span></label>
+                    <input type="text" class="form-control" placeholder="例：山田 太郎">
+                </div>
+                <div class="form-group">
+                    <label>メールアドレス <span>必須</span></label>
+                    <input type="email" class="form-control" placeholder="例：info@example.com">
+                </div>
+                <div class="form-group">
+                    <label>お電話番号 <span>必須</span></label>
+                    <input type="tel" class="form-control" placeholder="例：090-0000-0000">
+                </div>
+                <div class="form-group">
+                    <label>ご希望日時 <span>必須</span></label>
+                    <input type="date" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>ご希望の時間帯 <span>必須</span></label>
+                    <select class="form-control">
+                        <option value="">選択してください</option>
+                        <option value="10:00〜">10:00 〜</option>
+                        <option value="13:00〜">13:00 〜</option>
+                        <option value="15:00〜">15:00 〜</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>その他ご質問・ご要望など</label>
+                    <textarea class="form-control" placeholder="気になる点やご要望がございましたらご記入ください。"></textarea>
+                </div>
+                <div class="form-submit-row">
+                    <button type="submit" class="btn-submit">予約内容を送信する</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- サイトマップ型フッター -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-logo-row">
+                <div class="footer-logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">LIVEARC</div>
+            </div>
+
+            <div class="footer-sitemap">
+                <div class="sitemap-col">
+                    <div class="sitemap-group">
+                        <h3><a href="index.html">トップページ</a></h3>
+                    </div>
+                    <div class="sitemap-group">
+                        <h3><a href="concept.html">コンセプト</a></h3>
+                    </div>
+                    <div class="sitemap-group">
+                        <h3><a href="works.html">施工事例</a></h3>
+                    </div>
+                </div>
+
+                <div class="sitemap-col">
+                    <div class="sitemap-group">
+                        <h3><a href="products.html">プロダクト</a></h3>
+                        <ul>
+                            <li><a href="products.html#order">提案型オーダー住宅</a></li>
+                            <li><a href="products.html#standard">高水準規格住宅</a></li>
+                            <li><a href="products.html#custom">注文住宅</a></li>
+                            <li><a href="products.html#housing">分譲住宅</a></li>
+                            <li><a href="products.html#reform">リフォーム</a></li>
+                        </ul>
+                    </div>
+                    <div class="sitemap-group">
+                        <h3><a href="news.html">お知らせ</a></h3>
+                    </div>
+                </div>
+
+                <div class="sitemap-col">
+                    <div class="sitemap-group">
+                        <h3><a href="craftsmanship.html">こだわり</a></h3>
+                        <ul>
+                            <li><a href="craftsmanship.html#construction">自社責任施工の強み</a></li>
+                            <li><a href="craftsmanship.html#quality">特徴・性能</a></li>
+                            <li><a href="craftsmanship.html#support">保証・アフターサポート</a></li>
+                        </ul>
+                    </div>
+                    <div class="sitemap-group">
+                        <h3><a href="process.html">家づくりのプロセス</a></h3>
+                    </div>
+                    <div class="sitemap-group">
+                        <h3><a href="modelhouse.html">モデルハウス</a></h3>
+                    </div>
+                </div>
+
+                <div class="sitemap-col">
+                    <div class="sitemap-group">
+                        <h3><a href="company.html">会社紹介</a></h3>
+                        <ul>
+                            <li><a href="company.html#outline">会社概要</a></li>
+                            <li><a href="company.html#message">代表メッセージ</a></li>
+                            <li><a href="company.html#access">アクセス</a></li>
+                        </ul>
+                    </div>
+                    <div class="sitemap-group">
+                        <h3><a href="contact.html">お問い合わせ</a></h3>
+                        <ul>
+                            <li><a href="contact.html#consultation">個別相談予約</a></li>
+                            <li><a href="contact.html#modelhouse">モデルハウス見学予約</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom-row">
+                <div class="copyright">&copy; Livearc inc. All Rights Reserved.</div>
+                <div class="footer-bottom-links">
+                    <div class="footer-sns">
+                        <a href="#" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.41 19c1.72.46 8.59.46 8.59.46s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+                        </a>
+                        <a href="#" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                        </a>
+                    </div>
+                    <a href="privacy.html">プライバシーポリシー</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

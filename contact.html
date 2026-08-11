@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livearc | お問い合わせ・ご予約</title>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        :root {
+            --bg-base: #ffffff;
+            --bg-sub: #f5f5f3;
+            --text-main: #111111;
+            --text-muted: #777777;
+            --border-line: #dcdcdc;
+            --font-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            font-family: var(--font-base);
+            line-height: 1.8;
+            letter-spacing: 0.05em;
+            scroll-behavior: smooth;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* ヘッダー */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 4rem;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border-line);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            align-items: center;
+            gap: 1.8rem;
+        }
+
+        nav a {
+            font-size: 0.8rem;
+        }
+
+        nav a:hover {
+            color: #000;
+            border-bottom: 1px solid #000;
+        }
+
+        .nav-btn {
+            border: 1px solid var(--text-main);
+            padding: 0.35rem 0.9rem;
+            font-size: 0.8rem; 
+            transition: all 0.3s;
+        }
+        .nav-btn:hover {
+            background: var(--text-main);
+            color: #fff;
+            border-bottom: 1px solid var(--text-main);
+        }
+
+        /* パンくずリスト */
+        .breadcrumb {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 1.5rem 4rem;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 73px;
+        }
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* ページヘッダー */
+        .page-header {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 2rem 4rem 4rem 4rem;
+            border-bottom: 1px solid var(--border-line);
+        }
+        .page-header .sec-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 0;
+        }
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            line-height: 1.4;
+            margin-bottom: 1rem;
+        }
+
+        /* コンタクトセクション */
+        .contact-section {
+            padding: 8rem 4rem;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        
+        .contact-form-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--bg-base);
+            padding: 4rem;
+            border: 1px solid var(--border-line);
+            background-color: var(--bg-sub);
+        }
+
+        .contact-form-inner {
+            background: var(--bg-base);
+            padding: 4rem;
+            border: 1px solid var(--border-line);
+        }
+
+        .form-desc {
+            font-size: 0.9rem;
+            color: var(--text-main);
+            margin-bottom: 3rem;
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 2.2rem;
+        }
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            margin-bottom: 0.6rem;
+            letter-spacing: 0.05em;
+        }
+        .form-group label span {
+            background: var(--text-main);
+            color: #fff;
+            font-size: 0.65rem;
+            padding: 0.1rem 0.4rem;
+            margin-left: 0.5rem;
+            vertical-align: middle;
+        }
+
+        /* ラジオボタングループのスタイル */
+        .radio-group {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            padding: 0.5rem 0;
+        }
+        .radio-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+            cursor: pointer;
+            letter-spacing: 0.05em;
+        }
+        .radio-label input[type="radio"] {
+            accent-color: var(--text-main);
+            width: 1.1rem;
+            height: 1.1rem;
+            cursor: pointer;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            background: var(--bg-base);
+            border: 1px solid var(--border-line);
+            font-size: 0.95rem;
+            color: var(--text-main);
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .form-control:focus {
+            border-color: var(--text-main);
+        }
+        textarea.form-control {
+            resize: vertical;
+            min-height: 140px;
+        }
+
+        /* 予約関連フィールドの切り替え制御用ラッパー */
+        .conditional-field {
+            display: none; /* デフォルト非表示、JSで切り替え可能 */
+            background: var(--bg-sub);
+            padding: 1.5rem;
+            border: 1px solid var(--border-line);
+            margin-top: 0.8rem;
+        }
+        .conditional-field.active {
+            display: block;
+        }
+
+        .form-submit-row {
+            text-align: center;
+            margin-top: 3.5rem;
+        }
+        .btn-submit {
+            display: inline-block;
+            background: var(--text-main);
+            color: #fff;
+            padding: 1rem 4rem;
+            font-size: 0.85rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            border: 1px solid var(--text-main);
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+        .btn-submit:hover {
+            opacity: 0.8;
+        }
+
+        /* フッター */
+        footer {
+            background: #111111;
+            color: #ffffff;
+            padding: 10rem 4rem 6rem 4rem;
+            border-top: 1px solid #222222;
+        }
+        .footer-inner { max-width: 1300px; margin: 0 auto; }
+        .footer-logo-row { margin-bottom: 5rem; }
+        .footer-logo { font-size: 1.4rem; font-weight: 700; letter-spacing: 0.05em; display: inline-block; cursor: pointer; color: #ffffff; }
+        .footer-sitemap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3rem; margin-bottom: 6rem; }
+        .sitemap-col { display: flex; flex-direction: column; gap: 2rem; }
+        .sitemap-group h3 { font-size: 0.95rem; font-weight: 500; margin-bottom: 0.8rem; letter-spacing: 0.05em; }
+        .sitemap-group h3 a { color: #ffffff; }
+        .sitemap-group ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; padding-left: 0.8rem; border-left: 1px solid #333333; }
+        .sitemap-group li a { font-size: 0.82rem; color: #ffffff; }
+        .footer-bottom-row { display: flex; justify-content: space-between; align-items: center; padding-top: 4rem; border-top: 1px solid #222222; font-size: 0.75rem; color: #ffffff; }
+        .footer-sns {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .footer-sns a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            transition: opacity 0.3s;
+        }
+        .footer-sns a:hover {
+            opacity: 0.7;
+        }
+
+        .footer-bottom-links { display: flex; align-items: center;
+            gap: 2rem; }
+        .footer-bottom-links a { color: #ffffff; }
+
+        @media (max-width: 1024px) {
+            header { padding: 1.5rem 2rem; }
+            nav { display: none; }
+            .breadcrumb, .page-header { padding-left: 2rem; padding-right: 2rem; }
+            .contact-section { padding: 5rem 2rem; }
+            .contact-form-wrapper { padding: 1.5rem; }
+            .contact-form-inner { padding: 2rem; }
+            .radio-group { gap: 1rem; flex-direction: column; }
+            .footer-sitemap { grid-template-columns: repeat(2, 1fr); }
+            footer { padding: 7rem 2rem 4rem 2rem; }
+            .footer-bottom-row { flex-direction: column; gap: 1.5rem; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- グローバルヘッダー -->
+    <header>
+        <div class="logo" onclick="location.href='index.html';">LIVEARC</div>
+        <nav>
+            <ul>
+                <li><a href="concept.html">コンセプト</a></li>
+                <li><a href="products.html">プロダクト</a></li>
+                <li><a href="works.html">施工事例</a></li>
+                <li><a href="craftsmanship.html">こだわり</a></li>
+                <li><a href="process.html">家づくりのプロセス</a></li>
+                <li><a href="modelhouse.html">モデルハウス</a></li>
+                <li><a href="company.html">会社紹介</a></li>
+                <li style="display: flex; gap: 10px; align-items: center; margin-left: 0.5rem;">
+                    <a href="contact.html" class="nav-btn" style="border-bottom: 1px solid #000; background: var(--text-main); color: #fff;">お問い合わせ</a>
+                    <a href="modelhouse.html" class="nav-btn">モデルハウス見学</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- パンくずリスト -->
+    <div class="breadcrumb">
+        <a href="index.html">HOME</a> &gt; お問い合わせ
+    </div>
+
+    <!-- ページヘッダー -->
+    <div class="page-header">
+        <h1>お問い合わせ・ご予約</h1>
+        <div class="sec-label">Contact & Reservation</div>
+    </div>
+
+    <!-- お問い合わせフォームセクション -->
+    <section class="contact-section">
+        <div class="contact-form-wrapper">
+            <div class="contact-form-inner">
+                <div class="sec-label" style="text-align: center;">Inquiry Form</div>
+                <p class="form-desc">
+                    モデルハウスのご見学、個別相談のご予約、その他家づくりに関するご質問など、<br>下記フォームよりお気軽にお問い合わせください。
+                </p>
+
+                <form action="#" method="POST">
+                    
+                    <!-- 種別選択ラジオボタン -->
+                    <div class="form-group">
+                        <label>お問い合わせ種別 <span>必須</span></label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="inquiry_type" value="modelhouse" checked onclick="toggleReservationFields()"> モデルハウス見学予約
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="inquiry_type" value="consultation" onclick="toggleReservationFields()"> 個別相談予約
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="inquiry_type" value="general" onclick="toggleReservationFields()"> 一般お問い合わせ
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 見学予約・相談予約を選択した場合に表示する日時ブロック -->
+                    <div id="reservation-details" class="form-group conditional-field active">
+                        <label style="font-weight: 500; margin-bottom: 1rem;">【ご希望日時（見学・相談ご予約の方のみ）】</label>
+                        <div style="margin-bottom: 1.2rem;">
+                            <label>ご希望日</label>
+                            <input type="date" class="form-control">
+                        </div>
+                        <div>
+                            <label>ご希望の時間帯</label>
+                            <select class="form-control">
+                                <option value="">選択してください</option>
+                                <option value="10:00〜">10:00 〜</option>
+                                <option value="13:00〜">13:00 〜</option>
+                                <option value="15:00〜">15:00 〜</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- 基本情報入力フィールド -->
+                    <div class="form-group">
+                        <label>お名前 <span>必須</span></label>
+                        <input type="text" class="form-control" placeholder="例：山田 太郎" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>フリガナ <span>必須</span></label>
+                        <input type="text" class="form-control" placeholder="例：ヤマダ タロウ" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>メールアドレス <span>必須</span></label>
+                        <input type="email" class="form-control" placeholder="例：info@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>お電話番号 <span>必須</span></label>
+                        <input type="tel" class="form-control" placeholder="例：090-0000-0000" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>ご住所</label>
+                        <input type="text" class="form-control" placeholder="例：山形県山形市〇〇町 1-2-3">
+                    </div>
+
+                    <div class="form-group">
+                        <label>お問い合わせ内容・ご要望 <span>必須</span></label>
+                        <textarea class="form-control" placeholder="ご質問やご相談事項、気になる点などがございましたらご自由にお書きください。" required></textarea>
+                    </div>
+
+                    <div class="form-submit-row">
+                        <button type="submit" class="btn-submit">入力内容を確認して送信する</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- 簡易スクリプト：ラジオボタンの選択に応じて日時入力フィールドの表示・非表示を切り替え -->
+    <script>
+        function toggleReservationFields() {
+            const selectedType = document.querySelector('input[name="inquiry_type"]:checked').value;
+            const resField = document.getElementById('reservation-details');
+            
+            if (selectedType === 'general') {
+                resField.classList.remove('active');
+            } else {
+                resField.classList.add('active');
+            }
+        }
+    </script>
+
+    <!-- サイトマップ型フッター -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-logo-row">
+                <div class="footer-logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">LIVEARC</div>
+            </div>
+
+            <div class="footer-sitemap">
+                <div class="sitemap-col">
+                    <div class="sitemap-group">
+                        <h3><a href="index.html">トップページ</a></h3>
+                    </div>
+                    <div class="sitemap-group">
+                        <h3><a href="concept.html">コンセプト</a></h3>
+                    </div>
+                    <div class="sitemap-group">
+                        <h3><a href="works.html">施工事例</a></h3>
+                    </div>
+                </div>
+
+                <div class="sitemap-col">
+                    <div class="sitemap-group">
+                        <h3><a href="products.html">プロダクト</a></h3>
+                        <ul>
+                            <li><a href="products.html#order">提案型オーダー住宅</a></li>
+                            <li><a href="products.html#standard">高水準規格住宅</a></li>
+                            <li><a href="products.html#custom">注文住宅</a></li>
+                            <li><a href="products.html#housing">分譲住宅</a></li>
+                            <li><a href="products.html#reform">リフォーム</a></li>
+                        </ul>
+                    </div>
+                    <div class="sitemap-group">
+                        <h3><a href="news.html">お知らせ</a></h3>
+                    </div>
+                </div>
+
+                <div class="sitemap-col">
+                    <div class="sitemap-group">
+                        <h3><a href="craftsmanship.html">こだわり</a></h3>
+                        <ul>
+                            <li><a href="craftsmanship.html#construction">自社責任施工の強み</a></li>
+                            <li><a href="craftsmanship.html#quality">特徴・性能</a></li>
+                            <li><a href="craftsmanship.html#support">保証・アフターサポート</a></li>
+                        </ul>
+                    </div>
+                    <div class="sitemap-group">
+                        <h3><a href="process.html">家づくりのプロセス</a></h3>
+                    </div>
+                    <div class="sitemap-group">
+                        <h3><a href="modelhouse.html">モデルハウス</a></h3>
+                    </div>
+                </div>
+
+                <div class="sitemap-col">
+                    <div class="sitemap-group">
+                        <h3><a href="company.html">会社紹介</a></h3>
+                        <ul>
+                            <li><a href="company.html#outline">会社概要</a></li>
+                            <li><a href="company.html#message">代表メッセージ</a></li>
+                            <li><a href="company.html#access">アクセス</a></li>
+                        </ul>
+                    </div>
+                    <div class="sitemap-group">
+                        <h3><a href="contact.html">お問い合わせ</a></h3>
+                        <ul>
+                            <li><a href="contact.html#consultation">個別相談予約</a></li>
+                            <li><a href="contact.html#modelhouse">モデルハウス見学予約</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom-row">
+                <div class="copyright">&copy; Livearc inc. All Rights Reserved.</div>
+                <div class="footer-bottom-links">
+                    <div class="footer-sns">
+                        <a href="#" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.41 19c1.72.46 8.59.46 8.59.46s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+                        </a>
+                        <a href="#" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                        </a>
+                    </div>
+                    <a href="privacy.html">プライバシーポリシー</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livearc | こだわり・性能</title>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        :root {
+            --bg-base: #ffffff;
+            --bg-sub: #f5f5f3;
+            --text-main: #111111;
+            --text-muted: #777777;
+            --border-line: #dcdcdc;
+            --font-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            font-family: var(--font-base);
+            line-height: 1.8;
+            letter-spacing: 0.05em;
+            scroll-behavior: smooth;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* ヘッダー */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 4rem;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border-line);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            align-items: center;
+            gap: 1.8rem;
+        }
+
+        nav a {
+            font-size: 0.8rem;
+        }
+
+        nav a:hover {
+            color: #000;
+            border-bottom: 1px solid #000;
+        }
+
+        .nav-btn {
+            border: 1px solid var(--text-main);
+            padding: 0.35rem 0.9rem;
+            font-size: 0.8rem; 
+            transition: all 0.3s;
+        }
+        .nav-btn:hover {
+            background: var(--text-main);
+            color: #fff;
+            border-bottom: 1px solid var(--text-main);
+        }
+
+        /* ビジュアルワイドヘッダー */
+        .page-visual-header {
+            position: relative;
+            width: 100%;
+            height: 380px;
+            background-color: var(--bg-sub);
+            display: flex;
+            align-items: center;
+            margin-top: 73px;
+            margin-bottom: 0;
+        }
+        .page-visual-inner {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 4rem;
+        }
+        .page-visual-content h1 {
+            font-size: 2.2rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            line-height: 1.3;
+            color: #111111;
+            margin-bottom: 0.4rem;
+        }
+        .page-visual-content .sec-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            margin-bottom: 0;
+        }
+
+        /* 導入コピーエリア */
+        .page-intro-copy {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 8rem 4rem 4rem 4rem;
+            text-align: center;
+        }
+        .page-intro-copy h2 {
+            font-size: 2.2rem;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            line-height: 1.5;
+        }
+
+        /* ページ内アンカーナビ (サブナビ) */
+        .anchor-nav {
+            background: var(--bg-base);
+            border-top: none;
+            border-bottom: 1px solid var(--border-line);
+            padding: 1.2rem 4rem;
+            position: sticky;
+            top: 73px;
+            z-index: 900;
+        }
+        .anchor-list {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: flex-end;
+            gap: 3rem;
+            list-style: none;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            white-space: nowrap;
+        }
+        .anchor-list a {
+            color: var(--text-muted);
+            transition: color 0.3s;
+        }
+        .anchor-list a:hover {
+            color: var(--text-main);
+        }
+
+        /* セクション共通 */
+        section {
+            padding: 8rem 4rem;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .sec-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        /* 特集ブロック（左右レイアウト） */
+        .feature-block {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+        #construction .feature-block,
+        #quality .feature-block,
+        #support .feature-block {
+            align-items: start;
+        }
+        .feature-content h2 {
+            font-size: 2rem;
+            font-weight: 300;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.05em;
+        }
+        .feature-content p {
+            font-size: 0.95rem;
+            color: var(--text-main);
+            line-height: 2;
+            margin-bottom: 1.5rem;
+        }
+        .wire-visual {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            background: var(--bg-sub);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* 3つの性能グリッド（背景色：白・罫線維持） */
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+        .spec-card {
+            background: var(--bg-base);
+            border: 1px solid var(--border-line);
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .spec-card h3 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+        }
+        .spec-card p {
+            font-size: 0.85rem;
+            color: var(--text-main);
+            line-height: 1.9;
+        }
+
+        /* Information & Contact (CTA) エリア */
+        .contact-cta-section {
+            background: var(--bg-sub);
+            padding: 9rem 4rem;
+            text-align: center;
+        }
+        .footer-cta-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        .footer-cta-card {
+            background: var(--bg-base);
+            padding: 3rem;
+            border: 1px solid var(--border-line);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: opacity 0.3s;
+        }
+        .footer-cta-card:hover { opacity: 0.8; }
+        .footer-cta-card h3 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+        .footer-cta-card p {
+            font-size: 0.85rem;
+            color: var(--text-main);
+            margin-bottom: 2rem;
+        }
+        .btn-text-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--text-main);
+            padding-bottom: 4px;
+        }
+
+        /* フッター */
+        footer {
+            background: #111111;
+            color: #ffffff;
+            padding: 10rem 4rem 6rem 4rem;
+            border-top: 1px solid #222222;
+        }
+        .footer-inner { max-width: 1300px; margin: 0 auto; }
+        .footer-logo-row { margin-bottom: 5rem; }
+        .footer-logo { font-size: 1.4rem; font-weight: 700; letter-spacing: 0.05em; display: inline-block; cursor: pointer; color: #ffffff; }
+        .footer-sitemap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3rem; margin-bottom: 6rem; }
+        .sitemap-col { display: flex; flex-direction: column; gap: 2rem; }
+        .sitemap-group h3 { font-size: 0.95rem; font-weight: 500; margin-bottom: 0.8rem; letter-spacing: 0.05em; }
+        .sitemap-group h3 a { color: #ffffff; }
+        .sitemap-group ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; padding-left: 0.8rem; border-left: 1px solid #333333; }
+        .sitemap-group li a { font-size: 0.82rem; color: #ffffff; }
+        .footer-bottom-row { display: flex; justify-content: space-between; align-items: center; padding-top: 4rem; border-top: 1px solid #222222; font-size: 0.75rem; color: #ffffff; }
+        .footer-sns {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .footer-sns a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            transition: opacity 0.3s;
+        }
+        .footer-sns a:hover {
+            opacity: 0.7;
+        }
+
+        .footer-bottom-links { display: flex; align-items: center;
+            gap: 2rem; }
+        .footer-bottom-links a { color: #ffffff; }
+
+        @media (max-width: 1024px) {
+            header { padding: 1.5rem 2rem; }
+            nav { display: none; }
+            .page-visual-inner { padding: 0 2rem; }
+            .page-visual-header { height: 240px; }
+            .page-visual-content h1 { font-size: 1.8rem; }
+            .page-intro-copy { padding: 5rem 2rem 3rem 2rem; }
+            .anchor-nav { padding: 1rem 2rem; overflow-x: auto; }
+            .anchor-list { justify-content: flex-start; }
+            section { padding: 5rem 2rem; }
+            .feature-block { grid-template-columns: 1fr; gap: 3rem; }
+            .specs-grid { grid-template-columns: 1fr; }
+            .footer-sitemap { grid-template-columns: repeat(2, 1fr); }
+            .contact-cta-section { padding: 6rem 2rem; }
+            footer { padding: 7rem 2rem 4rem 2rem; }
+            .footer-bottom-row { flex-direction: column; gap: 1.5rem; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- グローバルヘッダー -->
+    <header>
+        <div class="logo" onclick="location.href='index.html';">LIVEARC</div>
+        <nav>
+            <ul>
+                <li><a href="concept.html">コンセプト</a></li>
+                <li><a href="products.html">プロダクト</a></li>
+                <li><a href="works.html">施工事例</a></li>
+                <li><a href="craftsmanship.html" style="border-bottom: 1px solid #000;">こだわり</a></li>
+                <li><a href="process.html">家づくりのプロセス</a></li>
+                <li><a href="modelhouse.html">モデルハウス</a></li>
+                <li><a href="company.html">会社紹介</a></li>
+                <li style="display: flex; gap: 10px; align-items: center; margin-left: 0.5rem;">
+                    <a href="contact.html" class="nav-btn">お問い合わせ</a>
+                    <a href="modelhouse.html" class="nav-btn">モデルハウス見学</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ビジュアルワイドヘッダー -->
+    <div class="page-visual-header">
+        <div class="page-visual-inner">
+            <div class="page-visual-content">
+                <h1>こだわり・性能</h1>
+                <div class="sec-label">Craftsmanship & Quality</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ページ内アンカーナビ -->
+    <div class="anchor-nav">
+        <ul class="anchor-list">
+            <li><a href="#construction">01. 自社責任施工の強み</a></li>
+            <li><a href="#quality">02. 特徴・性能（高気密・高断熱）</a></li>
+            <li><a href="#support">03. 保証・アフターサポート</a></li>
+        </ul>
+    </div>
+
+    <!-- 導入コピーエリア -->
+    <div class="page-intro-copy">
+        <h2>
+            妥協のない手仕事と、永く住み継がれる性能を。
+        </h2>
+    </div>
+
+    <!-- 01. 自社責任施工（左：[ 自社施工・職人の手仕事イメージ ]、右：テキスト） -->
+    <section id="construction" style="padding-top: 3rem;">
+        <div class="feature-block">
+            <div class="wire-visual">
+                [ 自社施工・職人の手仕事イメージ ]
+            </div>
+            <div class="feature-content">
+                <div class="sec-label">01. Responsibility</div>
+                <h2>設計から施工まで、想いを一貫して形にする「自社責任施工」。</h2>
+                <p>Livearcでは、図面を描く設計士と、現場で木に向き合う職人が常に密に連携しています。外部委託による伝達ロスをなくし、細部収まりの美しさや現場での柔軟な対応力を徹底。</p>
+                <p>私たちが手がける住まいはすべて、自分たちの手で責任を持って造り上げる誇りに満ちています。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 02. 特徴・性能（左：テキスト、右：[ 高気密・高断熱構造イメージ ]） -->
+    <section id="quality">
+        <div class="feature-block">
+            <div class="feature-content">
+                <div class="sec-label">02. Performance</div>
+                <h2>雪国・山形の気候風土に適応する、圧倒的な温熱環境。</h2>
+                <p>デザインの美しさだけでなく、一年を通してストレスのない快適な暮らしを担保するために。Livearcの住まいは、高い断熱性能と気密性能を標準化しています。</p>
+                <p>外気温に左右されず、家の中どこでも温度差が少ない空間は、家族の健康を守り、光熱費のランニングコストも抑えます。</p>
+            </div>
+            <div class="wire-visual">
+                [ 高気密・高断熱構造イメージ ]
+            </div>
+        </div>
+
+        <div class="specs-grid">
+            <div class="spec-card">
+                <div>
+                    <h3>高断熱・高性能</h3>
+                    <p>次世代基準を超える外皮性能により、冬の寒さや夏の熱気を遮断。室内の熱を逃しません。</p>
+                </div>
+            </div>
+            <div class="spec-card">
+                <div>
+                    <h3>高気密設計</h3>
+                    <p>隙間を徹底的に無くす気密施工により、計画換気が正しく機能し、きれいな空気が循環します。</p>
+                </div>
+            </div>
+            <div class="spec-card">
+                <div>
+                    <h3>耐震・制震構造</h3>
+                    <p>大地震の揺れに耐える強固な構造躯体に、揺れを吸収する制震ダンパーを組み合わせ、家族を守ります。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 03. 保証・アフターサポート（左：[ 定期点検・アフターサポートイメージ ]、右：テキスト） -->
+    <section id="support">
+        <div class="feature-block">
+            <div class="wire-visual">
+                [ 定期点検・アフターサポートイメージ ]
+            </div>
+            <div class="feature-content">
+                <div class="sec-label">03. Support</div>
+                <h2>引き渡してからが本当のお付き合い。充実の長期保証。</h2>
+                <p>家は建てて終わりではありません。住み始めてからの安心を守るため、定期点検プログラムや構造・防水の長期保証を完備しています。</p>
+                <p>気候の変化が大きい山形だからこそ、素早いフットワークで住まいのコンディションを維持し、世代を超えて受け継がれる家へと育てていきます。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Information & Contact (CTA) エリア -->
+    <div class="contact-cta-section">
+        <div class="sec-label">Information & Contact</div>
+        <div class="footer-cta-grid" style="margin-top: 2rem;">
+            <a href="modelhouse.html" class="footer-cta-card">
+                <div>
+                    <div class="sec-label">Visit</div>
+                    <h3>モデルハウス見学へ</h3>
+                    <p>山形市内のモデルハウスで、実際の空間や素材の質感を直接ご体感ください。</p>
+                </div>
+                <span class="btn-text-link" style="margin-top:0;">見学予約を見る &rarr;</span>
+            </a>
+            <a href="contact.html" class="footer-cta-card">
+                <div>
+                    <div class="sec-label">Contact & Request</div>
+                    <h3>個別相談予約する</h3>
+                    <p>資金計画や土地探しのご相談、カタログのご請求はこちらから承ります。</p>
+                </div>
+                <span class="btn-text-link" style="margin-top:0;">詳細・予約へ &rarr;</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- サイトマップ型フッター -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-logo-row">
+                <div class="footer-logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">LIVEARC</div>
+            </div>
+
+            <div class="footer-sitemap">
+                <div class="sitemap-col">
+                    <div class="sitemap-group">
+                        <h3><a href="index.html">トップページ</a></h3>
+                    </div>
+                    <div class="sitemap-group">
+                        <h3><a href="concept.html">コンセプト</a></h3>
+                    </div>
+                    <div class="sitemap-group">
+                        <h3><a href="works.html">施工事例</a></h3>
+                    </div>
+                </div>
+
+                <div class="sitemap-col">
+                    <div class="sitemap-group">
+                        <h3><a href="products.html">プロダクト</a></h3>
+                        <ul>
+                            <li><a href="products.html#order">提案型オーダー住宅</a></li>
+                            <li><a href="products.html#standard">高水準規格住宅</a></li>
+                            <li><a href="products.html#custom">注文住宅</a></li>
+                            <li><a href="products.html#housing">分譲住宅</a></li>
+                            <li><a href="products.html#reform">リフォーム</a></li>
+                        </ul>
+                    </div>
+                    <div class="sitemap-group">
+                        <h3><a href="news.html">お知らせ</a></h3>
+                    </div>
+                </div>
+
+                <div class="sitemap-col">
+                    <div class="sitemap-group">
+                        <h3><a href="craftsmanship.html">こだわり</a></h3>
+                        <ul>
+                            <li><a href="craftsmanship.html#construction">自社責任施工の強み</a></li>
+                            <li><a href="craftsmanship.html#quality">特徴・性能</a></li>
+                            <li><a href="craftsmanship.html#support">保証・アフターサポート</a></li>
+                        </ul>
+                    </div>
+                    <div class="sitemap-group">
+                        <h3><a href="process.html">家づくりのプロセス</a></h3>
+                    </div>
+                    <div class="sitemap-group">
+                        <h3><a href="modelhouse.html">モデルハウス</a></h3>
+                    </div>
+                </div>
+
+                <div class="sitemap-col">
+                    <div class="sitemap-group">
+                        <h3><a href="company.html">会社紹介</a></h3>
+                        <ul>
+                            <li><a href="company.html#outline">会社概要</a></li>
+                            <li><a href="company.html#message">代表メッセージ</a></li>
+                            <li><a href="company.html#access">アクセス</a></li>
+                        </ul>
+                    </div>
+                    <div class="sitemap-group">
+                        <h3><a href="contact.html">お問い合わせ</a></h3>
+                        <ul>
+                            <li><a href="contact.html#consultation">個別相談予約</a></li>
+                            <li><a href="contact.html#modelhouse">モデルハウス見学予約</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom-row">
+                <div class="copyright">&copy; Livearc inc. All Rights Reserved.</div>
+                <div class="footer-bottom-links">
+                    <div class="footer-sns">
+                        <a href="#" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.41 19c1.72.46 8.59.46 8.59.46s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+                        </a>
+                        <a href="#" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                        </a>
+                    </div>
+                    <a href="privacy.html">プライバシーポリシー</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

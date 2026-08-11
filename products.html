@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livearc | プロダクト - AURUM</title>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        :root {
+            --bg-base: #ffffff;
+            --bg-sub: #f5f5f3;
+            --text-main: #111111;
+            --text-muted: #777777;
+            --border-line: #dcdcdc;
+            --font-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            font-family: var(--font-base);
+            line-height: 1.8;
+            letter-spacing: 0.05em;
+            scroll-behavior: smooth;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* ヘッダー（固定配置） */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 4rem;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border-line);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            align-items: center;
+            gap: 1.8rem;
+        }
+
+        nav a {
+            font-size: 0.8rem;
+        }
+
+        nav a:hover {
+            color: #000;
+            border-bottom: 1px solid #000;
+        }
+
+        .nav-btn {
+            border: 1px solid var(--text-main);
+            padding: 0.35rem 0.9rem;
+            font-size: 0.8rem; 
+            transition: all 0.3s;
+        }
+        .nav-btn:hover {
+            background: var(--text-main);
+            color: #fff;
+            border-bottom: 1px solid var(--text-main);
+        }
+
+        /* ビジュアルワイドヘッダー */
+        .page-visual-header {
+            position: relative;
+            width: 100%;
+            height: 380px;
+            background-color: var(--bg-sub);
+            display: flex;
+            align-items: center;
+            margin-top: 73px;
+            margin-bottom: 6rem;
+        }
+        .page-visual-inner {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 4rem;
+        }
+        .page-visual-content h1 {
+            font-size: 2.2rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            line-height: 1.3;
+            color: #111111;
+            margin-bottom: 0.4rem;
+        }
+        .page-visual-content .sec-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            margin-bottom: 0;
+        }
+
+        /* セクション共通 */
+        .sec-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        /* 共通ボタン・リンクスタイル */
+        .btn-text-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--text-main);
+            padding-bottom: 4px;
+            margin-top: 1.5rem;
+            transition: opacity 0.3s;
+        }
+        .btn-text-link:hover { opacity: 0.6; }
+
+        /* ワイヤーフレーム用ビジュアルボックス */
+        .wire-visual {
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            background: var(--bg-sub);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            text-align: center;
+            padding: 1rem;
+        }
+        .gallery-caption {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 0.06em;
+            margin-top: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        /* ==========================================
+           AURUM（オーラム）特設エディトリアルレイアウト
+           ========================================== */
+        .aurum-section {
+            padding-top: 2rem;
+            padding-bottom: 6rem;
+        }
+        .aurum-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 4rem;
+        }
+
+        /* オーラムイントロブロック (左:テキスト, 右:画像) */
+        .aurum-hero-intro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+            margin-bottom: 6rem;
+        }
+        .aurum-hero-text h2 {
+            font-size: 2rem;
+            font-weight: 300;
+            line-height: 1.4;
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+        .aurum-hero-text p {
+            font-size: 1rem;
+            color: var(--text-main);
+            line-height: 2.2;
+            margin-bottom: 2rem;
+        }
+
+        /* 中央のフルワイドギャラリーボックス（ウィンドウ幅いっぱい） */
+        .aurum-full-gallery {
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            margin-bottom: 6rem;
+        }
+        .aurum-full-gallery .wire-visual {
+            width: 100%;
+            aspect-ratio: 21 / 9;
+            border-radius: 0;
+        }
+        .aurum-full-gallery .gallery-inner-wrap {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 4rem;
+        }
+
+        /* 建築思想・コンセプトセクション (左右入れ替え：左に画像、右にテキスト) */
+        .aurum-philosophy {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+            margin-bottom: 6rem;
+            padding: 6rem 0;
+        }
+        .philosophy-text h3 {
+            font-size: 1.8rem;
+            font-weight: 300;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+        }
+        .philosophy-text p {
+            font-size: 0.95rem;
+            color: var(--text-main);
+            line-height: 2.1;
+            margin-bottom: 1.5rem;
+        }
+
+        /* 4つの特長カード（背景色なし、上下または周囲に罫線あり） */
+        .aurum-features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            margin-bottom: 6rem;
+        }
+        .aurum-feature-card {
+            background: transparent;
+            padding: 2.5rem;
+            border: 1px solid var(--border-line);
+            position: relative;
+        }
+        .aurum-feature-card .card-num {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 0.08em;
+            display: block;
+            margin-bottom: 1rem;
+        }
+        .aurum-feature-card h4 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+        }
+        .aurum-feature-card p {
+            font-size: 0.9rem;
+            color: var(--text-main);
+            line-height: 1.9;
+            margin-bottom: 0;
+        }
+
+        /* スペック詳細セクション */
+        .aurum-specs-section {
+            background: var(--bg-base);
+            padding: 4rem 0;
+            margin-bottom: 4rem;
+        }
+        .aurum-specs-section h3 {
+            font-size: 1.4rem;
+            font-weight: 300;
+            margin-bottom: 2.5rem;
+            letter-spacing: 0.05em;
+        }
+        .spec-row {
+            display: flex;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid var(--border-line);
+            font-size: 0.9rem;
+        }
+        .spec-term {
+            width: 30%;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        .spec-desc {
+            width: 70%;
+            line-height: 1.7;
+        }
+
+        /* その他のプロダクトラインナップ */
+        .other-products-section {
+            padding: 6rem 4rem;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .other-products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .other-prod-card {
+            background: var(--bg-sub);
+            padding: 2.5rem 2rem;
+            border: 1px solid var(--border-line);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .other-prod-card span.num {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 1rem;
+            letter-spacing: 0.08em;
+        }
+        .other-prod-card h3 {
+            font-size: 1.1rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+        .other-prod-card p {
+            font-size: 0.85rem;
+            color: var(--text-main);
+            margin-bottom: 2rem;
+        }
+
+        /* Information & Contact (CTA) エリア */
+        .contact-cta-section {
+            background: var(--bg-sub);
+            padding: 8rem 4rem;
+            text-align: center;
+        }
+        .footer-cta-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        .footer-cta-card {
+            background: var(--bg-base);
+            padding: 3rem;
+            border: 1px solid var(--border-line);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: opacity 0.3s;
+        }
+        .footer-cta-card:hover { opacity: 0.8; }
+        .footer-cta-card h3 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+        .footer-cta-card p {
+            font-size: 0.85rem;
+            color: var(--text-main);
+            margin-bottom: 2rem;
+        }
+
+        /* 丁寧なサイトマップ型フッター */
+        footer {
+            background: #111111;
+            color: #ffffff;
+            padding: 8rem 4rem 5rem 4rem;
+            border-top: 1px solid #222222;
+        }
+        .footer-inner {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .footer-logo-row {
+            margin-bottom: 4rem;
+        }
+        .footer-logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            display: inline-block;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            color: #ffffff;
+        }
+        .footer-logo:hover { opacity: 0.7; }
+
+        .footer-sitemap {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            margin-bottom: 5rem;
+        }
+        .sitemap-col {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        .sitemap-group h3 {
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-bottom: 0.8rem;
+            letter-spacing: 0.05em;
+        }
+        .sitemap-group h3 a {
+            color: #ffffff;
+            transition: opacity 0.3s;
+        }
+        .sitemap-group h3 a:hover { opacity: 0.7; }
+        .sitemap-group ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            padding-left: 0.8rem;
+            border-left: 1px solid #333333;
+        }
+        .sitemap-group li a {
+            font-size: 0.82rem;
+            color: #ffffff;
+            transition: opacity 0.3s;
+        }
+        .sitemap-group li a:hover { opacity: 0.7; }
+
+        .footer-bottom-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 3rem;
+            border-top: 1px solid #222222;
+            font-size: 0.75rem;
+            color: #ffffff;
+        }
+        .copyright { color: #ffffff; }
+        .footer-sns {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .footer-sns a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            transition: opacity 0.3s;
+        }
+        .footer-sns a:hover {
+            opacity: 0.7;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        .footer-bottom-links a {
+            color: #ffffff;
+            transition: opacity 0.3s;
+        }
+        .footer-bottom-links a:hover { opacity: 0.7; }
+
+        @media (max-width: 1024px) {
+            header { padding: 1.5rem 2rem; }
+            nav { display: none; }
+            .aurum-container, .other-products-section { padding-left: 2rem; padding-right: 2rem; }
+            .page-visual-header { height: 240px; }
+            .page-visual-content h1 { font-size: 1.8rem; }
+            .aurum-hero-intro, .aurum-philosophy, .aurum-features-grid, .footer-cta-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .footer-sitemap { grid-template-columns: repeat(2, 1fr); }
+            .contact-cta-section { padding: 6rem 2rem; }
+            footer { padding: 6rem 2rem 4rem 2rem; }
+            .footer-bottom-row { flex-direction: column; gap: 1.5rem; align-items: flex-start; }
+            .aurum-full-gallery .gallery-inner-wrap { padding: 0 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- グローバルヘッダー -->
+    <header>
+        <div class="logo" onclick="location.href='index.html';">LIVEARC</div>
+        <nav>
+            <ul>
+                <li><a href="concept.html">コンセプト</a></li>
+                <li><a href="products.html" style="border-bottom: 1px solid #000;">プロダクト</a></li>
+                <li><a href="works.html">施工事例</a></li>
+                <li><a href="craftsmanship.html">こだわり</a></li>
+                <li><a href="process.html">家づくりのプロセス</a></li>
+                <li><a href="modelhouse.html">モデルハウス</a></li>
+                <li><a href="company.html">会社紹介</a></li>
+                <li style="display: flex; gap: 10px; align-items: center; margin-left: 0.5rem;">
+                    <a href="contact.html" class="nav-btn">お問い合わせ</a>
+                    <a href="modelhouse.html" class="nav-btn">モデルハウス見学</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ビジュアルワイドヘッダー -->
+    <div class="page-visual-header">
+        <div class="page-visual-inner">
+            <div class="page-visual-content">
+                <h1>プロダクト</h1>
+                <div class="sec-label">PRODUCTS</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================
+       1. 提案型オーダー住宅 AURUM（オーラム）
+       ========================================================== -->
+    <div id="order" class="aurum-section">
+        <div class="aurum-container">
+            
+            <!-- イントロダクション (左:テキスト, 右:画像) -->
+            <div class="sec-label">Product Lineup 01 —— Flagship Model</div>
+            <div class="aurum-hero-intro">
+                <div class="aurum-hero-text">
+                    <h2>提案型オーダー住宅<br>AURUM（オーラム）</h2>
+                    <p>Livearcのフラッグシップモデル「AURUM（オーラム）」。<br>それは既製品を組み合わせる家づくりではなく、土地が持つ光の道筋や風の抜け方を建築家が徹底的に読み解き、お客様ご家族の思想や人生観そのものを空間へと昇華させる唯一無二の完全自由設計住宅です。</p>
+                    <p>素材には漆喰や無垢材、特注の金属金物など経年変化を愛せる本物の素材のみを厳選。飾るための美しさではなく、共に時間を重ねるほどに深まる美しさを追求しています。</p>
+                </div>
+                <div>
+                    <div class="wire-visual" style="aspect-ratio: 4 / 3;">[ AURUM メイン外観：光と陰影のファサード ]</div>
+                    <div class="gallery-caption">Facade View / 夕景に映える陰影の設計</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 中央のフルワイドギャラリーボックス（ウィンドウ幅いっぱい） -->
+        <div class="aurum-full-gallery">
+            <div class="wire-visual" style="aspect-ratio: 21 / 9;">[ インテリア・リビング：吹き抜けと大開口サッシを望む大空間ギャラリー ]</div>
+            <div class="gallery-inner-wrap">
+                <div class="gallery-caption">Living Room / 外部へとシームレスにつながる開放的な大空間</div>
+            </div>
+        </div>
+
+        <div class="aurum-container">
+            <!-- 建築思想・デザインフィロソフィ（左右入れ替え：左に画像、右にテキスト） -->
+            <div class="aurum-philosophy">
+                <div>
+                    <div class="wire-visual" style="aspect-ratio: 4 / 3;">[ ディテール・素材感：光が差し込む廊下と無垢床 ]</div>
+                    <div class="gallery-caption">Detail / 光と影が織りなすパティオ・エントランス周辺</div>
+                </div>
+                <div class="philosophy-text">
+                    <div class="sec-label">Architectural Philosophy</div>
+                    <h3>既製品という制約を外し、<br>あなたの「原風景」をカタチにする。</h3>
+                    <p>どれほど美しい家具やインテリアであっても、空間のプロポーションや光の取り込み方が合わなければ調和は生まれません。AURUMでは[cite: 1]、壁の厚み、窓枠の納まり、照明の陰影に至るまですべてのディテールを建築家がミリ単位で設計。</p>
+                    <p>無駄な装飾を削ぎ落とした先にある、凛とした静けさと温もりが共存する空間をお届けします。</p>
+                </div>
+            </div>
+
+            <!-- 4つの特長カード（背景色なし、枠線あり） -->
+            <div class="sec-label" style="margin-bottom: 2rem;">Core Values of AURUM</div>
+            <div class="aurum-features-grid">
+                <div class="aurum-feature-card">
+                    <span class="card-num">01 / ARCHITECT</span>
+                    <h4>建築家との完全伴走体制</h4>
+                    <p>専属の建築家が最初のヒアリングから設計、インテリアコーディネート、施工監理まで一貫して伴走。理想のライフスタイルを妥協なく空間に落とし込みます。</p>
+                </div>
+                <div class="aurum-feature-card">
+                    <span class="card-num">02 / BESPOKE</span>
+                    <h4>空間を極限まで活かす造作設計</h4>
+                    <p>市販の既製品家具では成し得ない、住まいの寸法に完璧に整合したオリジナル収納や造作洗面・キッチン。空間全体に美しい統一感を与えます。</p>
+                </div>
+                <div class="aurum-feature-card">
+                    <span class="card-num">03 / MATERIAL</span>
+                    <h4>経年変化を慈しむ本物の素材</h4>
+                    <p>調湿性に優れた漆喰壁や、足触りの心地よい無垢フローリングなど[cite: 1]、年月が経つほどに味わいと愛着が増していく自然素材を標準採用しています。</p>
+                </div>
+                <div class="aurum-feature-card">
+                    <span class="card-num">04 / PERFORMANCE</span>
+                    <h4>最高等級の耐震と高断熱</h4>
+                    <p>圧倒的なデザイン性の裏側には、耐震等級3およびZEH水準を超える高気密・高断熱性能を担保。四季を通じて圧倒的な快適性を実現します。</p>
+                </div>
+            </div>
+
+            <!-- スペック詳細セクション -->
+            <div class="aurum-specs-section">
+                <h3>AURUM Specification & Details</h3>
+                <div class="spec-row">
+                    <div class="spec-term">設計手法</div>
+                    <div class="spec-desc">建築家による提案型トータルコーディネートデザイン</div>
+                </div>
+                <div class="spec-row">
+                    <div class="spec-term">構造・工法</div>
+                    <div class="spec-desc">木造軸組工法（耐震等級3・許容応力度計算実施・高気密高断熱仕様）</div>
+                </div>
+                <div class="spec-row">
+                    <div class="spec-term">主な標準仕様</div>
+                    <div class="spec-desc">無垢フローリング（オーク/ウォールナット）、漆喰塗り壁[cite: 1]、特注造作キッチン・洗面台、床暖房対応</div>
+                </div>
+                <div class="spec-row">
+                    <div class="spec-term">想定坪単価</div>
+                    <div class="spec-desc">90万円 / 坪〜（敷地条件・仕様により個別にお見積もりいたします）</div>
+                </div>
+                <div class="spec-row">
+                    <div class="spec-term">こんな方へ</div>
+                    <div class="spec-desc">間取りや素材に一切妥協せず、世界に一棟だけの特別な住まいを建てたい方</div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 4rem;">
+                <a href="contact.html" class="btn-text-link" style="font-size: 0.95rem; border-bottom: 2px solid var(--text-main); padding-bottom: 6px;">
+                    AURUMについて個別相談・資料請求をする &rarr;
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- ==========================================================
+       2. その他のプロダクトラインナップ
+       ========================================================== -->
+    <div class="other-products-section">
+        <div class="sec-label">Other Lineup</div>
+        <h2 style="font-size: 2rem; font-weight: 300; margin-bottom: 1rem;">その他のプロダクトラインナップ</h2>
+        <div class="other-products-grid">
+            <div id="standard" class="other-prod-card">
+                <div>
+                    <span class="num">02</span>
+                    <h3>高水準規格住宅（IRIS）</h3>
+                    <p>プロの設計知見が結集された洗練されたベースプラン。高い性能と美しさをコストパフォーマンス高く実現。</p>
+                </div>
+                <a href="contact.html" class="btn-text-link" style="margin-top:0;">詳細・ご相談 &rarr;</a>
+            </div>
+            <div id="housing" class="other-prod-card">
+                <div>
+                    <span class="num">03</span>
+                    <h3>分譲住宅</h3>
+                    <p>利便性の高いエリアに厳選された、Livearc品質のデザイナーズ分譲住宅。すぐにお住まいいただける洗練された空間。</p>
+                </div>
+                <a href="contact.html" class="btn-text-link" style="margin-top:0;">詳細・ご相談 &rarr;</a>
+            </div>
+            <div id="reform" class="other-prod-card">
+                <div>
+                    <span class="num">04</span>
+                    <h3>リノベーション</h3>
+                    <p>暮らしの変化に合わせた間取り変更や、Livearcのデザイン思想を落とし込んだ空間のリノベーション。</p>
+                </div>
+                <a href="contact.html" class="btn-text-link" style="margin-top:0;">詳細・ご相談 &rarr;</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Information & Contact (CTA) エリア -->
+    <div class="contact-cta-section">
+        <div class="sec-label">Information & Contact</div>
+        <div class="footer-cta-grid" style="margin-top: 0;">
+            <a href="modelhouse.html" class="footer-cta-card">
+                <div>
+                    <div class="sec-label">Visit</div>
+                    <h3>モデルハウス見学へ</h3>
+                    <p>山形市内のモデルハウスで、実際の空間や素材の質感を直接ご体感ください。</p>
+                </div>
+                <span class="btn-text-link" style="margin-top:0;">見学予約を見る &rarr;</span>
+            </a>
+            <a href="contact.html" class="footer-cta-card">
+                <div>
+                    <div class="sec-label">Contact & Request</div>
+                    <h3>個別相談予約する</h3>
+                    <p>資金計画や土地探しのご相談、カタログのご請求はこちらから承ります。</p>
+                </div>
+                <span class="btn-text-link" style="margin-top:0;">詳細・予約へ &rarr;</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- サイトマップ型フッター -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-logo-row">
+                <div class="footer-logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">LIVEARC</div>
+            </div>
+
+            <div class="footer-sitemap">
+                <div class="sitemap-col">
+                    <div class="sitemap-group">
+                        <h3><a href="index.html">トップページ</a></h3>
+                    </div>
+                    <div class="sitemap-group">
+                        <h3><a href="concept.html">コンセプト</a></h3>
+                    </div>
+                    <div class="sitemap-group">
+                        <h3><a href="works.html">施工事例</a></h3>
+                    </div>
+                </div>
+
+                <div class="sitemap-col">
+                    <div class="sitemap-group">
+                        <h3><a href="products.html">プロダクト</a></h3>
+                        <ul>
+                            <li><a href="products.html#order">提案型オーダー住宅</a></li>
+                            <li><a href="products.html#standard">高水準規格住宅</a></li>
+                            <li><a href="products.html#housing">分譲住宅</a></li>
+                            <li><a href="products.html#reform">リフォーム</a></li>
+                        </ul>
+                    </div>
+                    <div class="sitemap-group">
+                        <h3><a href="news.html">お知らせ</a></h3>
+                    </div>
+                </div>
+
+                <div class="sitemap-col">
+                    <div class="sitemap-group">
+                        <h3><a href="craftsmanship.html">こだわり</a></h3>
+                        <ul>
+                            <li><a href="craftsmanship.html#construction">自社責任施工の強み</a></li>
+                            <li><a href="craftsmanship.html#quality">特徴・性能</a></li>
+                            <li><a href="craftsmanship.html#support">保証・アフターサポート</a></li>
+                        </ul>
+                    </div>
+                    <div class="sitemap-group">
+                        <h3><a href="process.html">家づくりのプロセス</a></h3>
+                    </div>
+                    <div class="sitemap-group">
+                        <h3><a href="modelhouse.html">モデルハウス</a></h3>
+                    </div>
+                </div>
+
+                <div class="sitemap-col">
+                    <div class="sitemap-group">
+                        <h3><a href="company.html">会社紹介</a></h3>
+                        <ul>
+                            <li><a href="company.html#outline">会社概要</a></li>
+                            <li><a href="company.html#message">代表メッセージ</a></li>
+                            <li><a href="company.html#access">アクセス</a></li>
+                        </ul>
+                    </div>
+                    <div class="sitemap-group">
+                        <h3><a href="contact.html">お問い合わせ</a></h3>
+                        <ul>
+                            <li><a href="contact.html#consultation">個別相談予約</a></li>
+                            <li><a href="contact.html#modelhouse">モデルハウス見学予約</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom-row">
+                <div class="copyright">
+                    &copy; Livearc inc. All Rights Reserved.
+                </div>
+                <div class="footer-bottom-links">
+                    <div class="footer-sns">
+                        <a href="#" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.41 19c1.72.46 8.59.46 8.59.46s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+                        </a>
+                        <a href="#" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                        </a>
+                    </div>
+                    <a href="privacy.html">プライバシーポリシー</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
