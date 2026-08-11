@@ -1,5 +1,5 @@
 (function () {
-  var PASSWORD = "liveark";
+  var PASSWORD = "livearc";
   var STORAGE_KEY = "livearc_wf_auth";
 
   if (sessionStorage.getItem(STORAGE_KEY) === "1") {
