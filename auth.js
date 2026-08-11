@@ -36,7 +36,6 @@
     gate.id = "site-auth-gate";
     gate.innerHTML =
       '<div class="box">' +
-      "<h1>Livearc</h1>" +
       "<p>閲覧用パスワードを入力してください。</p>" +
       '<p class="error" id="site-auth-error"></p>' +
       '<input type="password" id="site-auth-input" autocomplete="current-password" placeholder="Password">' +
