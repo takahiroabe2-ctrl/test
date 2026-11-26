@@ -1,0 +1,717 @@
+/* index */
+
+header {
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.35s ease;
+}
+
+header.is-over-hero:not(.nav-open) {
+    background: transparent;
+    color: #ffffff;
+}
+
+header.is-over-hero:not(.nav-open) .logo img {
+    filter: brightness(0) invert(1);
+}
+
+header.is-over-hero:not(.nav-open) #global-nav a,
+header.is-over-hero:not(.nav-open) #global-nav a:not(.nav-btn):hover {
+    color: #ffffff;
+}
+
+header.is-over-hero:not(.nav-open) .nav-btn {
+    border-color: #ffffff;
+    color: #ffffff;
+}
+
+header.is-over-hero:not(.nav-open) .nav-btn:hover {
+    background: #ffffff;
+    color: #000000;
+    border-color: #ffffff;
+}
+
+header.is-over-hero:not(.nav-open) .nav-toggle span {
+    background: #ffffff;
+}
+
+header.is-over-hero:not(.nav-open) .nav-toggle:focus-visible {
+    outline-color: #ffffff;
+}
+
+/* セクション共通 */
+
+section {
+    padding: 8rem 4rem;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.sec-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+/* 1. FV：ビューポートいっぱいのフルブリード */
+
+.hero-visual {
+    width: 100%;
+    height: 100vh;
+    height: 100svh;
+    height: 100dvh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: #f3f0ea;
+    position: relative;
+}
+
+/* フルスクリーン 16:9 画像エリア */
+
+.fullscreen-visual {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: var(--bg-sub);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+}
+
+/* 共通ボタン・リンクスタイル */
+
+.btn-text-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding-bottom: 6px;
+    margin-top: 1.5rem;
+    color: #5c5951;
+    transition: color 0.3s ease;
+}
+
+.btn-text-link:hover,
+.footer-cta-card:hover .btn-text-link,
+.col-card:hover .btn-text-link {
+    color: var(--text-main);
+}
+
+.btn-text-link::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: currentColor;
+    transform: scaleX(1);
+    transform-origin: right center;
+}
+
+.btn-text-link:hover::after,
+.footer-cta-card:hover .btn-text-link::after,
+.col-card:hover .btn-text-link::after {
+    animation: line-run 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes line-run {
+    0% { transform: scaleX(1); transform-origin: right center; }
+    45% { transform: scaleX(0); transform-origin: right center; }
+    50% { transform: scaleX(0); transform-origin: left center; }
+    100% { transform: scaleX(1); transform-origin: left center; }
+}
+
+.btn-text-link__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 13px;
+    height: 13px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.btn-text-link__icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.btn-text-link:hover .btn-text-link__icon svg,
+.footer-cta-card:hover .btn-text-link__icon svg,
+.col-card:hover .btn-text-link__icon svg {
+    animation: arrow-loop 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    animation-delay: 0.08s;
+}
+
+@keyframes arrow-loop {
+    0% { transform: translateX(0); opacity: 1; }
+    45% { transform: translateX(120%); opacity: 0; }
+    50% { transform: translateX(-120%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+}
+
+/* コンセプト ダイジェスト */
+
+.concept-digest-section {
+    max-width: none;
+    width: 100%;
+    background-color: var(--bg-base);
+    padding: 8rem 4rem;
+}
+
+.digest-concept {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.digest-concept > :first-child { order: 2; }
+
+.digest-concept > :last-child { order: 1; }
+
+.digest-concept p {
+    font-size: 1.2rem;
+    font-weight: 300;
+    line-height: 2.0;
+}
+
+/* AURUM ピックアップ */
+
+.aurum-pickup-section {
+    max-width: none;
+    width: 100%;
+    background-color: #f3f0ea;
+    padding: 8rem 4rem;
+}
+
+.aurum-pickup {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 5rem;
+    align-items: center;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.aurum-pickup-text { order: 1; }
+
+.aurum-pickup-visual { order: 2; }
+
+.aurum-pickup-visual {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background: var(--bg-sub);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+}
+
+.aurum-pickup-text h2 {
+    font-size: 1.8rem;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    line-height: 1.5;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+}
+
+/* 施工事例 ダイジェスト */
+
+.digest-works {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+    margin-top: 2rem;
+}
+
+.work-card {
+    display: block;
+}
+
+.wire-visual-work {
+    aspect-ratio: 16 / 10;
+    background: var(--bg-sub);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+    transition: opacity 0.3s;
+}
+
+.work-card:hover .wire-visual-work {
+    opacity: 0.8;
+}
+
+.work-info h3 {
+    font-size: 0.95rem;
+    font-weight: 400;
+    line-height: 1.5;
+    margin-bottom: 0.3rem;
+}
+
+.work-info span {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+}
+
+/* モデルハウス セクション */
+
+.modelhouse-section {
+    background-color: #f3f0ea;
+    padding: 7rem 0;
+    overflow: hidden;
+}
+
+.modelhouse-header {
+    max-width: 1300px;
+    margin: 0 auto 3rem auto;
+    padding: 0 4rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    column-gap: 1.5rem;
+    row-gap: 0.25rem;
+}
+
+.modelhouse-title-area { display: contents; }
+
+.modelhouse-title-area h2 {
+    grid-column: 1;
+    grid-row: 1;
+    font-size: 1.8rem;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    margin-bottom: 0;
+}
+
+.modelhouse-title-area .sec-label {
+    grid-column: 1;
+    grid-row: 2;
+    margin-bottom: 0;
+}
+
+.modelhouse-controls {
+    grid-column: 2;
+    grid-row: 1;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.modelhouse-count {
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+}
+
+.modelhouse-count span.current {
+    color: var(--text-main);
+}
+
+.slider-arrows {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.arrow-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 1px solid var(--border-line);
+    background: var(--bg-base);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.arrow-btn:hover {
+    border-color: var(--text-main);
+}
+
+.modelhouse-slider {
+    container-type: inline-size;
+    overflow: hidden;
+    width: 100%;
+}
+
+.modelhouse-slider-track {
+    display: flex;
+    gap: 2rem;
+    align-items: stretch;
+    width: max-content;
+}
+
+.mh-card {
+    flex: 0 0 56cqw;
+    width: 56cqw;
+    background: var(--bg-base);
+    overflow: hidden;
+}
+
+.mh-visual {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    background: var(--bg-sub);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+.modelhouse-footer-cta {
+    text-align: center;
+    margin-top: 4rem;
+}
+
+/* こだわり & プロセス 2カラム誘導 */
+
+.digest-two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+}
+
+.col-card {
+    background: var(--bg-sub);
+    padding: 3rem;
+    border: 1px solid var(--border-line);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: opacity 0.3s;
+}
+
+.col-card:hover {
+    opacity: 0.8;
+}
+
+.col-card h2 {
+    font-size: 1.3rem;
+    font-weight: 400;
+    margin-bottom: 0.25rem;
+}
+
+.col-card .sec-label {
+    margin-bottom: 0;
+}
+
+.col-card .btn-text-link {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 3rem;
+    padding-bottom: 8px;
+}
+
+/* お知らせ（ニュース）セクション */
+
+.news-list {
+    margin-top: 2rem;
+    border-top: 1px solid var(--border-line);
+}
+
+.news-item {
+    display: grid;
+    grid-template-columns: 6.5rem 6rem 1fr;
+    align-items: center;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--border-line);
+    column-gap: 1.25rem;
+}
+
+.news-date {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+}
+
+.news-category {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 6rem;
+    font-size: 0.75rem;
+    padding: 0.2rem 0.5rem;
+    border: 1px solid var(--border-line);
+    background: var(--bg-sub);
+    color: var(--text-muted);
+    white-space: nowrap;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.news-title {
+    position: relative;
+    justify-self: start;
+    width: fit-content;
+    max-width: 100%;
+    font-size: 0.95rem;
+    font-weight: 400;
+    line-height: 1.5;
+    min-width: 0;
+}
+
+.news-title::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.news-item:hover .news-title::after {
+    transform: scaleX(1);
+}
+
+/* Information & Contact エリア（独立セクション） */
+
+.contact-cta-section {
+    background: #f3f0ea;
+    padding: 9rem 4rem;
+    text-align: center;
+}
+
+.footer-cta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.footer-cta-card {
+    background: var(--bg-base);
+    padding: 5rem 4rem;
+    border: 1px solid var(--border-line);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: opacity 0.3s;
+}
+
+.footer-cta-card:hover {
+    opacity: 0.8;
+}
+
+.contact-cta-section > .sec-label {
+    font-size: 1.4rem;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: var(--text-main);
+    margin-bottom: 2.5rem;
+}
+
+.footer-cta-card h3 {
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+
+.footer-cta-card p {
+    font-size: 0.85rem;
+    color: var(--text-main);
+    margin-bottom: 2rem;
+}
+
+.footer-cta-card .btn-text-link {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 0;
+    padding-bottom: 8px;
+}
+
+.sitemap-group .menu-label a {
+    transition: opacity 0.3s;
+}
+
+.sitemap-group .menu-label a:hover {
+    opacity: 0.7;
+}
+
+.sitemap-group li a {
+    transition: opacity 0.3s;
+}
+
+.sitemap-group li a:hover {
+    opacity: 0.7;
+}
+
+.copyright {
+    color: #5c5951;
+}
+
+.footer-bottom-links a {
+    transition: opacity 0.3s;
+}
+
+.footer-bottom-links a:hover {
+    opacity: 0.7;
+}
+
+@media (max-width: 1024px) {
+    header { padding: 1.5rem 2rem; }
+    section { padding: 5rem 2rem; }
+    .aurum-pickup-section,
+    .concept-digest-section { padding: 5rem 2rem; }
+    .digest-concept, .aurum-pickup, .digest-works, .digest-two-col, .footer-cta-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .digest-concept > :first-child,
+    .digest-concept > :last-child,
+    .aurum-pickup-text,
+    .aurum-pickup-visual { order: 0; }
+    .footer-sitemap { grid-template-columns: repeat(2, 1fr); }
+    .modelhouse-section { padding: 5rem 0; }
+    .modelhouse-header {
+        column-gap: 0.75rem;
+        row-gap: 0.25rem;
+        padding: 0 2rem;
+        margin-bottom: 1.75rem;
+    }
+    .modelhouse-title-area .sec-label {
+        grid-column: 1;
+        grid-row: 2;
+    }
+    .modelhouse-controls { gap: 0.75rem; }
+    .modelhouse-section .slider-arrows { gap: 0.4rem; }
+    .modelhouse-section .arrow-btn { width: 40px; height: 40px; }
+    .news-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .contact-cta-section { padding: 6rem 2rem; }
+    footer { padding: 7rem 2rem 2.5rem 2rem; }
+    .footer-bottom-row { flex-direction: column; gap: 1.35rem; align-items: flex-start; padding-top: 3.5rem; }
+    .footer-logo img { width: 84px; }
+}
+
+@media (max-width: 768px) {
+    .modelhouse-slider-track { gap: calc(2rem + 4px); }
+    .mh-card {
+        flex: 0 0 calc(100cqw - 4rem);
+        width: calc(100cqw - 4rem);
+    }
+    .mh-visual { aspect-ratio: 4 / 3; }
+}
+
+@media (max-width: 1024px) {
+    .contact-cta-section {
+        padding: 5rem 2rem;
+    }
+    .contact-cta-section > .sec-label {
+        font-size: 1.15rem;
+        font-weight: 400;
+        letter-spacing: 0.11em;
+        margin-bottom: 2.5rem;
+    }
+    .footer-cta-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin-top: 0 !important;
+    }
+    .footer-cta-card {
+        padding: 2.1rem 1.7rem 1.45rem;
+    }
+    .footer-cta-card h3 {
+        font-size: 1.05rem;
+        font-weight: 500;
+        margin-bottom: 1.15rem;
+    }
+    .footer-cta-card p {
+        font-size: 0.88rem;
+        line-height: 2.0;
+        margin-bottom: 2.75rem;
+    }
+    .footer-cta-card .btn-text-link {
+        color: var(--text-main);
+        font-size: 0.88rem;
+        padding-bottom: 8px;
+    }
+}
+
+.hero-visual,
+.fullscreen-visual,
+.wire-visual,
+.wire-visual-work,
+.wire-visual-main,
+.aurum-pickup-visual,
+.mh-visual,
+.gallery-placeholder,
+.work-thumb,
+.related-work-thumb,
+.article-img-block {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-visual img,
+.fullscreen-visual img,
+.wire-visual img,
+.wire-visual-work img,
+.wire-visual-main img,
+.aurum-pickup-visual img,
+.mh-visual img,
+.gallery-placeholder img,
+.work-thumb img,
+.related-work-thumb img,
+.article-img-block img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.hero-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+}
+
+.hero-visual .hero-slide {
+    opacity: 0;
+    z-index: 0;
+}
+
+.hero-visual .hero-slide.is-active {
+    opacity: 1;
+    z-index: 1;
+}
+
+.digest-concept .wire-visual-work {
+    aspect-ratio: auto;
+    height: auto;
+}
+
+.digest-concept .wire-visual-work img {
+    position: static;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}

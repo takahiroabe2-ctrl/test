@@ -1,0 +1,569 @@
+/* products */
+
+/* 導入コピーエリア */
+
+.page-intro-copy {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 8rem 4rem 4rem 4rem;
+    text-align: center;
+}
+
+.page-intro-copy h2 {
+    font-size: 2.2rem;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    line-height: 1.5;
+}
+
+/* セクション共通 */
+
+.sec-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+/* 共通ボタン・リンクスタイル */
+
+.btn-text-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding-bottom: 6px;
+    margin-top: 1.5rem;
+    color: #5c5951;
+    transition: color 0.3s ease;
+}
+
+.btn-text-link:hover,
+.footer-cta-card:hover .btn-text-link {
+    color: var(--text-main);
+}
+
+.btn-text-link::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: currentColor;
+    transform: scaleX(1);
+    transform-origin: right center;
+}
+
+.btn-text-link:hover::after,
+.footer-cta-card:hover .btn-text-link::after {
+    animation: line-run 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes line-run {
+    0% { transform: scaleX(1); transform-origin: right center; }
+    45% { transform: scaleX(0); transform-origin: right center; }
+    50% { transform: scaleX(0); transform-origin: left center; }
+    100% { transform: scaleX(1); transform-origin: left center; }
+}
+
+.btn-text-link__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 13px;
+    height: 13px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.btn-text-link__icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.btn-text-link:hover .btn-text-link__icon svg,
+.footer-cta-card:hover .btn-text-link__icon svg {
+    animation: arrow-loop 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    animation-delay: 0.08s;
+}
+
+@keyframes arrow-loop {
+    0% { transform: translateX(0); opacity: 1; }
+    45% { transform: translateX(120%); opacity: 0; }
+    50% { transform: translateX(-120%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+}
+
+/* ワイヤーフレーム用ビジュアルボックス */
+
+.wire-visual {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    background: var(--bg-sub);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-align: center;
+    padding: 1rem;
+}
+
+/* ==========================================
+   AURUM（オーラム）特設エディトリアルレイアウト
+   ========================================== */
+
+.aurum-section {
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+}
+
+.aurum-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 4rem;
+}
+
+/* オーラムイントロブロック
+   上段: 左に内観 / 右に見出し
+   下段: 左に本文 / 右に外観 */
+
+.aurum-hero-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+    margin-bottom: 6rem;
+}
+
+.aurum-hero-text h2 {
+    font-size: 1.8rem;
+    font-weight: 300;
+    line-height: 1.5;
+    margin-bottom: 2rem;
+    letter-spacing: 0.08em;
+}
+
+.aurum-hero-text p {
+    font-size: 1rem;
+    color: var(--text-main);
+    line-height: 2.0;
+    margin-bottom: 2rem;
+}
+
+.aurum-hero-text p:last-child {
+    margin-bottom: 0;
+}
+
+/* 中央のフルワイドギャラリーボックス（ウィンドウ幅いっぱい） */
+
+.aurum-full-gallery {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    margin-bottom: 6rem;
+}
+
+.aurum-full-gallery .wire-visual {
+    width: 100%;
+    aspect-ratio: 21 / 9;
+    border-radius: 0;
+}
+
+/* 建築思想・コンセプトセクション (左右入れ替え：左に画像、右にテキスト) */
+
+.aurum-philosophy {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+    margin-bottom: 6rem;
+}
+
+.philosophy-text h3 {
+    font-size: 1.8rem;
+    font-weight: 300;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+}
+
+.philosophy-text p {
+    font-size: 0.95rem;
+    color: var(--text-main);
+    line-height: 2.0;
+    margin-bottom: 1.5rem;
+}
+
+/* 3つの特長カード（背景色なし、枠線あり） */
+
+.aurum-features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 10rem;
+}
+
+.aurum-feature-card {
+    background: transparent;
+    padding: 2.5rem;
+    border: 1px solid var(--border-line);
+    position: relative;
+}
+
+.aurum-feature-card h3 {
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    letter-spacing: 0.08em;
+}
+
+.aurum-feature-card p {
+    font-size: 0.9rem;
+    color: var(--text-main);
+    line-height: 2.0;
+    margin-bottom: 0;
+}
+
+/* スペック詳細セクション */
+
+.aurum-specs-section {
+    background: var(--bg-base);
+    padding: 4rem 0 0;
+    margin-bottom: 0;
+}
+
+.aurum-block-title {
+    font-size: 1.8rem;
+    font-weight: 300;
+    line-height: 1.3;
+    letter-spacing: 0.08em;
+    margin-bottom: 2rem;
+}
+
+.aurum-specs-section .aurum-block-title {
+    margin-bottom: 2.5rem;
+}
+
+.spec-row {
+    display: flex;
+    padding: 2.4rem 0;
+    border-bottom: 1px solid var(--border-line);
+    font-size: 0.9rem;
+}
+
+.aurum-specs-section .spec-row:first-of-type {
+    border-top: 1px solid var(--border-line);
+}
+
+.spec-term {
+    width: 30%;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.spec-desc {
+    width: 70%;
+    line-height: 2.0;
+}
+
+/* その他のプロダクトラインナップ */
+
+.other-products-section {
+    padding: 6rem 4rem 8rem;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.other-products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.other-prod-card {
+    background: var(--bg-sub);
+    padding: 2.5rem 2rem;
+    border: 1px solid var(--border-line);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.other-prod-card h3 {
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+
+.other-prod-card p {
+    font-size: 0.85rem;
+    color: var(--text-main);
+    margin-bottom: 0;
+}
+
+.other-prod-card.is-unpublished,
+.other-prod-card.is-unpublished h3,
+.other-prod-card.is-unpublished p {
+    color: #85827c;
+}
+
+/* 施工事例プレビュー */
+
+.works-preview {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 8rem 4rem 9rem;
+}
+
+.works-preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.works-preview-header h2 {
+    font-size: 1.8rem;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+}
+
+.digest-works {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+}
+
+.work-card {
+    display: block;
+}
+
+.wire-visual-work {
+    aspect-ratio: 16 / 10;
+    background: var(--bg-sub);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+    transition: opacity 0.3s;
+}
+
+.work-card:hover .wire-visual-work {
+    opacity: 0.8;
+}
+
+.work-info h3 {
+    font-size: 0.95rem;
+    font-weight: 400;
+    line-height: 1.5;
+    margin-bottom: 0.3rem;
+}
+
+.work-info span {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+}
+
+/* Information & Contact (CTA) エリア */
+
+.contact-cta-section {
+    background: #f3f0ea;
+    padding: 8rem 4rem;
+    text-align: center;
+}
+
+.footer-cta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.footer-cta-card {
+    background: var(--bg-base);
+    padding: 5rem 4rem;
+    border: 1px solid var(--border-line);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: opacity 0.3s;
+}
+
+.contact-cta-section > .sec-label {
+    font-size: 1.4rem;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: var(--text-main);
+    margin-bottom: 2.5rem;
+}
+
+.footer-cta-card:hover { opacity: 0.8; }
+
+.footer-cta-card h3 {
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+
+.footer-cta-card p {
+    font-size: 0.85rem;
+    color: var(--text-main);
+    margin-bottom: 2rem;
+}
+
+.footer-cta-card .btn-text-link {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 0;
+    padding-bottom: 8px;
+}
+
+footer {
+    padding: 8rem 4rem 2.5rem 4rem;
+}
+
+.footer-sitemap {
+    margin-bottom: 5rem;
+}
+
+.sitemap-group .menu-label a {
+    transition: opacity 0.3s;
+}
+
+.sitemap-group .menu-label a:hover { opacity: 0.7; }
+
+.sitemap-group li a {
+    transition: opacity 0.3s;
+}
+
+.sitemap-group li a:hover { opacity: 0.7; }
+
+.copyright { color: #5c5951; }
+
+.footer-bottom-links a {
+    transition: opacity 0.3s;
+}
+
+.footer-bottom-links a:hover { opacity: 0.7; }
+
+@media (max-width: 1024px) {
+    header { padding: 1.5rem 2rem; }
+    .aurum-container, .other-products-section { padding-left: 2rem; padding-right: 2rem; }
+    .other-products-section { padding-bottom: 6rem; }
+    .page-visual-header { height: calc(240px + 73px); }
+    .page-visual-content h1 { font-size: 1.8rem; }
+    .page-intro-copy { padding: 5rem 2rem 3rem 2rem; }
+    .works-preview { padding: 5rem 2rem 6rem; }
+    .works-preview-header { flex-direction: column; align-items: flex-start; }
+    .aurum-hero-intro, .aurum-philosophy, .aurum-features-grid, .other-products-grid, .digest-works, .footer-cta-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .aurum-hero-intro:not(:last-child) { margin-bottom: 3rem; }
+    .footer-sitemap { grid-template-columns: repeat(2, 1fr); }
+    .contact-cta-section { padding: 6rem 2rem; }
+    footer { padding: 6rem 2rem 2.5rem 2rem; }
+    .footer-bottom-row { flex-direction: column; gap: 1.35rem; align-items: flex-start; padding-top: 3.5rem; }
+    .footer-logo img { width: 84px; }
+}
+
+@media (max-width: 1024px) {
+    .contact-cta-section {
+        padding: 5rem 2rem;
+    }
+    .contact-cta-section > .sec-label {
+        font-size: 1.15rem;
+        font-weight: 400;
+        letter-spacing: 0.11em;
+        margin-bottom: 2.5rem;
+    }
+    .footer-cta-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin-top: 0 !important;
+    }
+    .footer-cta-card {
+        padding: 2.1rem 1.7rem 1.45rem;
+    }
+    .footer-cta-card h3 {
+        font-size: 1.05rem;
+        font-weight: 500;
+        margin-bottom: 1.15rem;
+    }
+    .footer-cta-card p {
+        font-size: 0.88rem;
+        line-height: 2.0;
+        margin-bottom: 2.75rem;
+    }
+    .footer-cta-card .btn-text-link {
+        color: var(--text-main);
+        font-size: 0.88rem;
+        padding-bottom: 8px;
+    }
+}
+
+.hero-visual,
+.fullscreen-visual,
+.wire-visual,
+.wire-visual-work,
+.wire-visual-main,
+.aurum-pickup-visual,
+.mh-visual,
+.gallery-placeholder,
+.work-thumb,
+.related-work-thumb,
+.article-img-block {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-visual img,
+.fullscreen-visual img,
+.wire-visual img,
+.wire-visual-work img,
+.wire-visual-main img,
+.aurum-pickup-visual img,
+.mh-visual img,
+.gallery-placeholder img,
+.work-thumb img,
+.related-work-thumb img,
+.article-img-block img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.aurum-hero-intro .wire-visual,
+.aurum-philosophy .wire-visual {
+    aspect-ratio: auto;
+    height: auto;
+    padding: 0;
+    overflow: visible;
+    background: transparent;
+}
+
+.aurum-hero-intro .wire-visual img,
+.aurum-philosophy .wire-visual img {
+    position: static;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}

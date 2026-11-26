@@ -1,0 +1,327 @@
+/* works */
+
+.page-visual-header {
+    margin-bottom: 4rem;
+}
+
+/* セクション共通 */
+
+section {
+    padding: 2rem 4rem 9rem 4rem;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.sec-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+/* フィルタータブ */
+
+.filter-tabs {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    font-size: 0.8rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding-bottom: 4px;
+    color: var(--text-muted);
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s;
+}
+
+.filter-btn.active, .filter-btn:hover {
+    color: var(--text-main);
+    border-bottom: 1px solid var(--text-main);
+}
+
+.filter-btn:disabled,
+.filter-btn:disabled:hover,
+.filter-btn:disabled:focus {
+    color: #85827c;
+    border-bottom-color: transparent;
+    cursor: default;
+    pointer-events: none;
+    opacity: 1;
+}
+
+/* 施工事例グリッド */
+
+.works-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4rem 2.5rem;
+}
+
+.work-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.work-thumb {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    background: var(--bg-sub);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    margin-bottom: 1.2rem;
+    transition: opacity 0.3s;
+}
+
+.work-card:hover .work-thumb {
+    opacity: 0.8;
+}
+
+.work-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.08em;
+}
+
+.work-title {
+    font-size: 1.1rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    line-height: 1.5;
+    transition: opacity 0.3s;
+}
+
+.work-card:hover .work-title {
+    opacity: 0.6;
+}
+
+/* Information & Contact (CTA) エリア */
+
+.contact-cta-section {
+    background: #f3f0ea;
+    padding: 9rem 4rem;
+    text-align: center;
+}
+
+.footer-cta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.footer-cta-card {
+    background: var(--bg-base);
+    padding: 5rem 4rem;
+    border: 1px solid var(--border-line);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: opacity 0.3s;
+}
+
+.footer-cta-card:hover {
+    opacity: 0.8;
+}
+
+.contact-cta-section > .sec-label {
+    font-size: 1.4rem;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: var(--text-main);
+    margin-bottom: 2.5rem;
+}
+
+.footer-cta-card h3 {
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+
+.footer-cta-card p {
+    font-size: 0.85rem;
+    color: var(--text-main);
+    margin-bottom: 2rem;
+}
+
+.footer-cta-card .btn-text-link {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 0;
+    padding-bottom: 8px;
+}
+
+.btn-text-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding-bottom: 6px;
+    color: #5c5951;
+    transition: color 0.3s ease;
+}
+
+.btn-text-link:hover,
+.footer-cta-card:hover .btn-text-link {
+    color: var(--text-main);
+}
+
+.btn-text-link::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: currentColor;
+    transform: scaleX(1);
+    transform-origin: right center;
+}
+
+.btn-text-link:hover::after,
+.footer-cta-card:hover .btn-text-link::after {
+    animation: line-run 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes line-run {
+    0% { transform: scaleX(1); transform-origin: right center; }
+    45% { transform: scaleX(0); transform-origin: right center; }
+    50% { transform: scaleX(0); transform-origin: left center; }
+    100% { transform: scaleX(1); transform-origin: left center; }
+}
+
+.btn-text-link__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 13px;
+    height: 13px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.btn-text-link__icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.btn-text-link:hover .btn-text-link__icon svg,
+.footer-cta-card:hover .btn-text-link__icon svg {
+    animation: arrow-loop 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    animation-delay: 0.08s;
+}
+
+@keyframes arrow-loop {
+    0% { transform: translateX(0); opacity: 1; }
+    45% { transform: translateX(120%); opacity: 0; }
+    50% { transform: translateX(-120%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+}
+
+.sitemap-group li a {
+    transition: opacity 0.3s;
+}
+
+.sitemap-group li a:hover { opacity: 0.7; }
+
+@media (max-width: 1024px) {
+    header { padding: 1.5rem 2rem; }
+    .page-visual-inner { padding: 0 2rem; }
+    .page-visual-header { height: calc(240px + 73px); }
+    .page-visual-content h1 { font-size: 1.8rem; }
+    section { padding: 2rem 2rem 9rem 2rem; }
+    .works-grid, .footer-cta-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .footer-sitemap { grid-template-columns: repeat(2, 1fr); }
+    footer { padding: 7rem 2rem 2.5rem 2rem; }
+    .footer-bottom-row { flex-direction: column; gap: 1.35rem; align-items: flex-start; padding-top: 3.5rem; }
+    .footer-logo img { width: 84px; }
+}
+
+@media (max-width: 1024px) {
+    .contact-cta-section {
+        padding: 5rem 2rem;
+    }
+    .contact-cta-section > .sec-label {
+        font-size: 1.15rem;
+        font-weight: 400;
+        letter-spacing: 0.11em;
+        margin-bottom: 2.5rem;
+    }
+    .footer-cta-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin-top: 0 !important;
+    }
+    .footer-cta-card {
+        padding: 2.1rem 1.7rem 1.45rem;
+    }
+    .footer-cta-card h3 {
+        font-size: 1.05rem;
+        font-weight: 500;
+        margin-bottom: 1.15rem;
+    }
+    .footer-cta-card p {
+        font-size: 0.88rem;
+        line-height: 2.0;
+        margin-bottom: 2.75rem;
+    }
+    .footer-cta-card .btn-text-link {
+        color: var(--text-main);
+        font-size: 0.88rem;
+        padding-bottom: 8px;
+    }
+}
+
+.hero-visual,
+.fullscreen-visual,
+.wire-visual,
+.wire-visual-work,
+.wire-visual-main,
+.aurum-pickup-visual,
+.mh-visual,
+.gallery-placeholder,
+.work-thumb,
+.related-work-thumb,
+.article-img-block {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-visual img,
+.fullscreen-visual img,
+.wire-visual img,
+.wire-visual-work img,
+.wire-visual-main img,
+.aurum-pickup-visual img,
+.mh-visual img,
+.gallery-placeholder img,
+.work-thumb img,
+.related-work-thumb img,
+.article-img-block img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
